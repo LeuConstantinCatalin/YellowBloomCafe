@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  nume: MyString
+  prenume: MyString
+  data_nastere: 2025-04-10
+  email: MyString
+  password_digest: MyString
+  tip: MyString
+  adresa: MyString
+
+two:
+  username: MyString
+  nume: MyString
+  prenume: MyString
+  data_nastere: 2025-04-10
+  email: MyString
+  password_digest: MyString
+  tip: MyString
+  adresa: MyString

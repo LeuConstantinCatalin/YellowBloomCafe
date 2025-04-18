@@ -1,0 +1,274 @@
+/* Stiluri pentru secțiunile din pagina angajatului */
+.section-content {
+  padding: 20px;
+  margin-bottom: 40px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li .status {
+  font-weight: bold;
+}
+
+/* Stiluri pentru comenzi */
+.comanda-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #e2ad5f;
+  transition: transform 0.3s ease;
+}
+
+.comanda-card:hover {
+  transform: translateY(-5px);
+}
+
+.comanda-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.status-options {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.status-options label {
+  font-size: 0.95rem;
+  color: #444;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.status-options label:hover {
+  background: #ffe7c4;
+}
+
+.status-options input[type="radio"] {
+  margin-right: 6px;
+}
+
+/* Stiluri pentru produsele indisponibile */
+.produs-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #e2ad5f;
+  transition: transform 0.3s ease;
+}
+
+.produs-card:hover {
+  transform: translateY(-5px);
+}
+
+.produs-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.status-options {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.status-options label {
+  font-size: 0.95rem;
+  color: #444;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.status-options label:hover {
+  background: #ffe7c4;
+}
+
+.status-options input[type="radio"] {
+  margin-right: 6px;
+}
+
+/* Pisici */
+.pisica-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #e2ad5f;
+  transition: transform 0.3s ease;
+}
+
+.pisica-card:hover {
+  transform: translateY(-5px);
+}
+
+.pisica-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.pisica-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Mese */
+.masa-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #e2ad5f;
+  transition: transform 0.3s ease;
+}
+
+.masa-card:hover {
+  transform: translateY(-5px);
+}
+
+.masa-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.masa-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Butonul + pentru adăugarea rezervărilor */
+button#add-reservation-1, button#add-reservation-2, button#add-reservation-3 {
+  background-color: #e2ad5f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button#add-reservation-1:hover, button#add-reservation-2:hover, button#add-reservation-3:hover {
+  background-color: #d18b4f;
+}
+
+/* Lista de rezervări */
+.reservation-list {
+  margin-top: 15px;
+}
+
+.reservation-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.reservation-item label {
+  font-size: 14px;
+  color: #333;
+}
+
+.reservation-item input[type="time"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Mesaje */
+.mesaj-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #e2ad5f;
+  transition: transform 0.3s ease;
+}
+
+.mesaj-card:hover {
+  transform: translateY(-5px);
+}
+
+.mesaj-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.mesaj-card .sender {
+  font-size: 0.95rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* Stil pentru formularul de rezervare */
+.reservation-form {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-form label {
+  font-size: 1rem;
+  color: #555;
+  margin-right: 10px;
+}
+
+.reservation-form input[type="time"] {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  width: 120px;
+  transition: border-color 0.3s ease;
+}
+
+.reservation-form input[type="time"]:focus {
+  outline: none;
+  border-color: #e2ad5f;
+}
+
+.reservation-form input[type="time"]:hover {
+  border-color: #bbb;
+}
+

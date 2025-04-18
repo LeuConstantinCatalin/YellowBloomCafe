@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panou Angajat - Cat Cafeteria</title>
+  
+  <!-- Link către fișierul CSS -->
+  <%= stylesheet_link_tag 'employee_controls', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+
+  <div class="employee-dashboard">
+    <main class="employee-content">
+
+ <!-- 📦 Comenzi -->
+<section id="sectiunea-comenzi" class="section-content">
+  <h2>📦 Comenzi</h2>
+  
+
+  <div class="comanda-card">
+    <h3>Comandă #101</h3>
+    <p><strong>Produse:</strong> Latte, Cheesecake</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_101" value="in_curs"> În curs</label>
+      <label><input type="radio" name="status_101" value="finalizata"> Finalizată</label>
+      <label><input type="radio" name="status_101" value="asteptare"> În așteptare</label>
+    </div>
+  </div>
+
+  <div class="comanda-card">
+    <h3>Comandă #102</h3>
+    <p><strong>Produse:</strong> Espresso, Muffin</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_102" value="in_curs"> În curs</label>
+      <label><input type="radio" name="status_102" value="finalizata"> Finalizată</label>
+      <label><input type="radio" name="status_102" value="asteptare"> În așteptare</label>
+    </div>
+  </div>
+
+  <div class="comanda-card">
+    <h3>Comandă #103</h3>
+    <p><strong>Produse:</strong> Cappuccino, Croissant</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_103" value="in_curs"> În curs</label>
+      <label><input type="radio" name="status_103" value="finalizata"> Finalizată</label>
+      <label><input type="radio" name="status_103" value="asteptare"> În așteptare</label>
+    </div>
+  </div>
+</section>
+
+ <!-- 🍰 Produse indisponibile -->
+<section id="sectiunea-produse" class="section-content">
+  <h2>🍰 Produse indisponibile</h2>
+
+  <div class="produs-card">
+    <h3>Cheesecake Zmeură</h3>
+    <p><strong>Motiv:</strong> Lipsă ingrediente</p>
+    <div class="status-options">
+      <label><input type="radio" name="produs_cheesecake" value="indisponibil" checked> Indisponibil</label>
+      <label><input type="radio" name="produs_cheesecake" value="disponibil"> Disponibil din nou</label>
+    </div>
+  </div>
+
+  <div class="produs-card">
+    <h3>Latte Vanilie</h3>
+    <p><strong>Motiv:</strong> Așteaptă livrare</p>
+    <div class="status-options">
+      <label><input type="radio" name="produs_latte" value="indisponibil" checked> Indisponibil</label>
+      <label><input type="radio" name="produs_latte" value="disponibil"> Disponibil din nou</label>
+    </div>
+  </div>
+
+  <div class="produs-card">
+    <h3>Tartă cu mere</h3>
+    <p><strong>Motiv:</strong> Cuptor defect</p>
+    <div class="status-options">
+      <label><input type="radio" name="produs_tarta" value="indisponibil" checked> Indisponibil</label>
+      <label><input type="radio" name="produs_tarta" value="disponibil"> Disponibil din nou</label>
+    </div>
+  </div>
+
+  <div class="produs-card">
+    <h3>Ciocolată caldă</h3>
+    <p><strong>Motiv:</strong> Rețetă în revizuire</p>
+    <div class="status-options">
+      <label><input type="radio" name="produs_ciocolata" value="indisponibil" checked> Indisponibil</label>
+      <label><input type="radio" name="produs_ciocolata" value="disponibil"> Disponibil din nou</label>
+    </div>
+  </div>
+
+  <div class="produs-card">
+    <h3>Cappuccino</h3>
+    <p><strong>Motiv:</strong> Espressor în mentenanță</p>
+    <div class="status-options">
+      <label><input type="radio" name="produs_cappuccino" value="indisponibil" checked> Indisponibil</label>
+      <label><input type="radio" name="produs_cappuccino" value="disponibil"> Disponibil din nou</label>
+    </div>
+  </div>
+</section>
+
+
+       <!-- 🐱 Pisici -->
+<section id="sectiunea-pisici" class="section-content">
+  <h2>🐱 Pisici</h2>
+
+  <div class="pisica-card">
+    <h3>Mitzi</h3>
+    <p>Status: Activă</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_mitzi" value="activa"> Activă</label>
+      <label><input type="radio" name="status_mitzi" value="somn"> Somn</label>
+      <label><input type="radio" name="status_mitzi" value="joaca"> Joacă</label>
+    </div>
+  </div>
+
+  <div class="pisica-card">
+    <h3>Luna</h3>
+    <p>Status: Somn</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_luna" value="activa"> Activă</label>
+      <label><input type="radio" name="status_luna" value="somn"> Somn</label>
+      <label><input type="radio" name="status_luna" value="joaca"> Joacă</label>
+    </div>
+  </div>
+
+  <div class="pisica-card">
+    <h3>Tom</h3>
+    <p>Status: Joacă</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_tom" value="activa"> Activă</label>
+      <label><input type="radio" name="status_tom" value="somn"> Somn</label>
+      <label><input type="radio" name="status_tom" value="joaca"> Joacă</label>
+    </div>
+  </div>
+</section>
+
+<!-- 📅 Mese -->
+<section id="sectiunea-mese" class="section-content">
+  <h2>📅 Mese</h2>
+
+  <div class="masa-card">
+    <h3>Masa 1</h3>
+    <p>Status: <span class="status-masa" id="status-masa-1">Ocupată</span></p>
+    <div class="status-options">
+      <label><input type="radio" name="status_masa_1" value="ocupata" onchange="updateStatus(1)"> Ocupată</label>
+      <label><input type="radio" name="status_masa_1" value="libera" onchange="updateStatus(1)"> Liberă</label>
+      <label><input type="radio" name="status_masa_1" value="rezervata" onchange="showReservationForm(1)"> Rezervată</label>
+    </div>
+
+    <div id="reservation-list-1" class="reservation-list"></div>
+
+    <button type="button" id="add-reservation-1" onclick="addReservation(1)">+</button>
+  </div>
+
+  <div class="masa-card">
+    <h3>Masa 2</h3>
+    <p>Status: <span class="status-masa" id="status-masa-2">Liberă</span></p>
+    <div class="status-options">
+      <label><input type="radio" name="status_masa_2" value="ocupata" onchange="updateStatus(2)"> Ocupată</label>
+      <label><input type="radio" name="status_masa_2" value="libera" onchange="updateStatus(2)"> Liberă</label>
+      <label><input type="radio" name="status_masa_2" value="rezervata" onchange="showReservationForm(2)"> Rezervată</label>
+    </div>
+
+    <div id="reservation-list-2" class="reservation-list"></div>
+
+    <button type="button" id="add-reservation-2" onclick="addReservation(2)">+</button>
+  </div>
+
+  <div class="masa-card">
+    <h3>Masa 3</h3>
+    <p>Status: <span class="status-masa" id="status-masa-3">Rezervată</span></p>
+    <div class="status-options">
+      <label><input type="radio" name="status_masa_3" value="ocupata" onchange="updateStatus(3)"> Ocupată</label>
+      <label><input type="radio" name="status_masa_3" value="libera" onchange="updateStatus(3)"> Liberă</label>
+      <label><input type="radio" name="status_masa_3" value="rezervata" onchange="showReservationForm(3)"> Rezervată</label>
+    </div>
+
+    <div id="reservation-list-3" class="reservation-list"></div>
+
+    <button type="button" id="add-reservation-3" onclick="addReservation(3)">+</button>
+  </div>
+</section>
+
+<script>
+  // Functie pentru actualizarea textului statusului
+  function updateStatus(masaId) {
+    const statusMasa = document.querySelector(`#status-masa-${masaId}`);
+    const selectedStatus = document.querySelector(`input[name="status_masa_${masaId}"]:checked`).value;
+
+    switch (selectedStatus) {
+      case 'ocupata':
+        statusMasa.textContent = "Ocupată";
+        break;
+      case 'libera':
+        statusMasa.textContent = "Liberă";
+        break;
+      case 'rezervata':
+        statusMasa.textContent = "Rezervată";
+        break;
+    }
+  }
+
+  // Functie pentru a arata formularul de rezervare
+  function showReservationForm(masaId) {
+    document.querySelector(`#reservation-list-${masaId}`).style.display = 'block';
+  }
+
+  // Functie pentru a adauga o noua rezervare
+  function addReservation(masaId) {
+    const reservationList = document.querySelector(`#reservation-list-${masaId}`);
+    const newReservation = document.createElement('div');
+    newReservation.classList.add('reservation-item');
+    
+    newReservation.innerHTML = `
+      <label for="reservation-time-${masaId}-${Date.now()}">Ora rezervării:</label>
+      <input type="time" id="reservation-time-${masaId}-${Date.now()}" name="reservation-time-${masaId}-${Date.now()}">
+    `;
+    reservationList.appendChild(newReservation);
+  }
+</script>
+
+
+<!-- 💬 Mesaje -->
+<section id="sectiunea-mesaje" class="section-content">
+  <h2>💬 Mesaje</h2>
+
+  <div class="mesaj-card">
+    <h3>„Vă mulțumim pentru latte!”</h3>
+    <p class="sender">- Andrei</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_mesaj_1" value="citit"> Citit</label>
+    </div>
+  </div>
+
+  <div class="mesaj-card">
+    <h3>„Pisicile sunt minunate!”</h3>
+    <p class="sender">- Maria</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_mesaj_2" value="citit"> Citit</label>
+    </div>
+  </div>
+
+  <div class="mesaj-card">
+    <h3>„Sugestie: muzică mai relaxantă.”</h3>
+    <p class="sender">- Ioana</p>
+    <div class="status-options">
+      <label><input type="radio" name="status_mesaj_3" value="citit"> Citit</label>
+    </div>
+  </div>
+</section>
+
+
+    </main>
+  </div>
+
+  <script>
+    // Scroll lin către secțiuni
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

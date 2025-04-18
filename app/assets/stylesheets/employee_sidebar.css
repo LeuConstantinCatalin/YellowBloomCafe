@@ -1,0 +1,61 @@
+/* Stiluri rafinate pentru sidebar-ul angajatului */
+.employee-sidebar {
+  background-color: #ffe7c4;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.employee-sidebar h2 {
+  font-size: 1.75rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e2ad5f;
+  padding-bottom: 10px;
+}
+
+.employee-sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.employee-sidebar li {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.employee-sidebar li:last-child {
+  margin-bottom: 0;
+}
+
+.employee-sidebar a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25); /* fundal sticlos */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* umbra subtila */
+  backdrop-filter: blur(8px); /* efect blur */
+  -webkit-backdrop-filter: blur(8px); /* Safari */
+  transition: all 0.3s ease;
+}
+
+.employee-sidebar a:hover {
+  color: #e2ad5f;
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.employee-sidebar a:focus,
+.employee-sidebar a:hover {
+  outline: none;
+}
+
+.employee-sidebar .highlight {
+  background-color: #f9f3ec;
+  border-radius: 5px;
+  padding: 5px;
+}

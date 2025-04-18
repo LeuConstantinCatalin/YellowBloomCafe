@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acasa</title>
+  <%= stylesheet_link_tag 'menu', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+  <div class="menu-page">
+    <!-- Secțiunea Cafele -->
+    <div class="menu-section card collapsible">
+      <div class="menu-header">
+        <strong>Cafele</strong>
+        <button class="toggle-btn" onclick="toggleSection(this)">▼</button>
+      </div>
+      <div class="menu-content">
+        <ul>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Espresso</strong>
+                <em class="product-ingredients">cafea măcinată fin, apă</em>
+                <span class="product-price">10 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Cappuccino</strong>
+                <em class="product-ingredients">espresso, lapte, spumă</em>
+                <span class="product-price">14 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Latte</strong>
+                <em class="product-ingredients">espresso, lapte</em>
+                <span class="product-price">15 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Caramel Macchiato</strong>
+                <em class="product-ingredients">lapte, espresso, caramel</em>
+                <span class="product-price">17 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Mocha</strong>
+                <em class="product-ingredients">espresso, lapte, ciocolată</em>
+                <span class="product-price">18 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Secțiunea Prajituri -->
+    <div class="menu-section card collapsible">
+      <div class="menu-header">
+        <strong>Prajituri</strong>
+        <button class="toggle-btn" onclick="toggleSection(this)">▼</button>
+      </div>
+      <div class="menu-content">
+        <ul>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Cheesecake</strong>
+                <em class="product-ingredients">brânză, biscuiți, fructe</em>
+                <span class="product-price">16 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Tartă cu lămâie</strong>
+                <em class="product-ingredients">lămâie, crustă de unt, bezea</em>
+                <span class="product-price">15 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Tartă cu fructe de pădure</strong>
+                <em class="product-ingredients">fructe de pădure, cremă de vanilie</em>
+                <span class="product-price">18 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Brownie cu ciocolată</strong>
+                <em class="product-ingredients">ciocolată neagră, nuci</em>
+                <span class="product-price">14 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Mousse de ciocolată</strong>
+                <em class="product-ingredients">ciocolată, frișcă</em>
+                <span class="product-price">12 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Secțiunea Bauturi Racoritoare -->
+    <div class="menu-section card collapsible">
+      <div class="menu-header">
+        <strong>Băuturi Răcoritoare</strong>
+        <button class="toggle-btn" onclick="toggleSection(this)">▼</button>
+      </div>
+      <div class="menu-content">
+        <ul>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Citronadă</strong>
+                <em class="product-ingredients">lămâie, zahăr, apă</em>
+                <span class="product-price">8 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Ceai Iced</strong>
+                <em class="product-ingredients">ceai rece, mentă</em>
+                <span class="product-price">10 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Limonadă cu mentă</strong>
+                <em class="product-ingredients">lămâie, mentă, apă minerală</em>
+                <span class="product-price">9 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Smoothie de fructe de pădure</strong>
+                <em class="product-ingredients">fructe de pădure, iaurt</em>
+                <span class="product-price">12 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Apă minerală</strong>
+                <em class="product-ingredients">apă minerală</em>
+                <span class="product-price">5 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Secțiunea Smoothie-uri -->
+    <div class="menu-section card collapsible">
+      <div class="menu-header">
+        <strong>Smoothie-uri</strong>
+        <button class="toggle-btn" onclick="toggleSection(this)">▼</button>
+      </div>
+      <div class="menu-content">
+        <ul>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Smoothie de banane și căpșuni</strong>
+                <em class="product-ingredients">banane, căpșuni, iaurt</em>
+                <span class="product-price">14 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Smoothie tropical</strong>
+                <em class="product-ingredients">mango, ananas, apă de cocos</em>
+                <span class="product-price">15 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Smoothie de avocado</strong>
+                <em class="product-ingredients">avocado, banană, iaurt</em>
+                <span class="product-price">16 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+          <li>
+            <div class="product">
+              <div class="product-info">
+                <strong class="product-name">Smoothie de piersici</strong>
+                <em class="product-ingredients">piersici, iaurt, miere</em>
+                <span class="product-price">14 lei</span>
+              </div>
+              <div class="product-placeholder"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(button) {
+      const content = button.closest('.menu-section').querySelector('.menu-content');
+      const isOpen = content.classList.contains('open');
+
+      // Toggle class
+      content.classList.toggle('open');
+
+      // Schimbă textul butonului
+      button.textContent = isOpen ? '▼' : '▲';
+
+      // Dacă se deschide, setăm max-height pentru a permite animația
+      if (!isOpen) {
+        content.style.maxHeight = content.scrollHeight + 'px'; // Extinde la înălțimea conținutului
+      } else {
+        content.style.maxHeight = '0'; // Colapsează secțiunea
+      }
+    }
+  </script>
+</body>
+</html>

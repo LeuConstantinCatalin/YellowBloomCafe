@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cont - Logare/Înregistrare</title>
+    <%= stylesheet_link_tag 'account', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+    <div class="form-container">
+
+        <% if @current_user %>
+            <div class="user-info">
+                <h2>Bine ai revenit, <%= @current_user["username"] %>!</h2>
+                <p><strong>Email:</strong> <%= @current_user["email"] %></p>
+                <p><strong>Data nașterii:</strong> <%= @current_user["birthdate"] %></p>
+                <form method="post" action="<%= logout_path %>">
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <button type="submit" class="form-button">Deconectare</button>
+                </form>
+            </div>
+        <% else %>
+
+        <!-- Butoane pentru schimbarea între Login și Signup -->
+        <div class="form-tabs">
+            <button class="tab-button active" onclick="showForm('login')">Logare</button>
+            <button class="tab-button" onclick="showForm('signup')">Înregistrare</button>
+        </div>
+
+        <!-- Formular Logare -->
+        <div id="login-form" class="form-section">
+            <h2>Logare</h2>
+            <%= form_with(url: account_path, method: :post, local: true) do |f| %>
+            <div class="form-group">
+                <%= f.label :email, "Email:" %>
+                <%= f.email_field :email, id: "login-email", class: "form-input", required: true %>
+            </div>
+            <div class="form-group">
+                <%= f.label :password, "Parolă:" %>
+                <%= f.password_field :password, id: "login-password", class: "form-input", required: true %>
+            </div>
+            <button type="submit" class="form-button">Logare</button>
+        <% end %>
+        </div>
+
+        <!-- Formular Înregistrare -->
+        <div id="signup-form" class="form-section" style="display: none;">
+            <h2>Înregistrare</h2>
+            <%= form_with(model: @user || User.new, local: true) do |f| %>
+                <div class="form-group">
+                    <%= f.label :username, "Username:" %>
+                    <%= f.text_field :username, id: "signup-username", class: "form-input", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :nume, "Nume:" %>
+                    <%= f.text_field :nume, id: "signup-nume", class: "form-input", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :prenume, "Prenume:" %>
+                    <%= f.text_field :prenume, id: "signup-prenume", class: "form-input", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :data_nastere, "Data nașterii:" %>
+                    <%= f.date_field :data_nastere, id: "signup-data-nastere", class: "form-input", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :email, "Email:" %>
+                    <%= f.email_field :email, id: "signup-email", class: "form-input", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :password, "Parolă:" %>
+                    <%= f.password_field :password, id: "signup-password", class: "form-input", required: true %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.label :password_confirmation, "Confirmă parola:" %>
+                    <%= f.password_field :password_confirmation, id: "signup-confirm-password", class: "form-input", required: true %>
+                </div>
+
+                <%= f.submit "Înregistrare", class: "form-button" %>
+            <% end %>
+        </div>
+
+        <!-- Mesaje de eroare -->
+        <% if @error_message %>
+            <div class="error-message">
+                <%= @error_message %>
+            </div>
+        <% end %>
+
+        <% if @success_message %>
+            <div class="success-message">
+                <%= @success_message %>
+            </div>
+        <% end %>
+
+        <% end %> <!-- end if not logged in -->
+
+    </div>
+
+    <script>
+        function showForm(formType) {
+            if (formType === 'login') {
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('signup-form').style.display = 'none';
+                document.querySelector('.tab-button.active').classList.remove('active');
+                document.querySelector('.tab-button:nth-child(1)').classList.add('active');
+            } else {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('signup-form').style.display = 'block';
+                document.querySelector('.tab-button.active').classList.remove('active');
+                document.querySelector('.tab-button:nth-child(2)').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

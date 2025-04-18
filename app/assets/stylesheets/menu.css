@@ -1,0 +1,157 @@
+/* Meniu - Pagina */
+.menu-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Cardul pentru fiecare sectiune (Cafea, Prajituri) */
+.menu-section {
+  background-color: #f9f3ec;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  transition: ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+.menu-section:hover {
+  background-color:rgb(197, 181, 169);
+  scale: 1.02;
+  transition: ease-in-out 0.3s;
+}
+
+/* Headerul sectiunii */
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Butonul de "Deschidere" (la sectiune) */
+.toggle-btn {
+  background-color: #d57373;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background-color: #e2ad5f;
+}
+
+/* Contenutul sectiunii */
+.menu-content {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 15px;
+  transition: max-height 0.5s ease-out;
+}
+
+.menu-content.open {
+  max-height: 500px;
+}
+
+/* Produse in sectiuni (Cafea, Prajiturile etc.) */
+.menu-content ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.menu-content li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+  background-color: #e8e3dd;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.menu-content li:hover {
+  background-color:rgb(255, 255, 255);
+}
+
+/* Placeholder imagine pentru produse */
+.product-placeholder {
+  width: 160px;
+  height: 160px;
+  background-color: #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.product-placeholder:hover {
+  background-color: #b0b0b0;
+}
+
+/* Info produs (nume, ingrediente, preț) */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  flex: 1; /* ocupă restul lățimii disponibile */
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.product-ingredients {
+  font-style: italic;
+  color: #777;
+}
+
+.product-price {
+  font-weight: bold;
+  color: #e2ad5f;
+}
+
+/* Alinierea elementelor: textul la stânga, imaginea la dreapta */
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.product-info {
+  text-align: left;  /* Aliniem textul la stânga */
+}
+
+.product-placeholder {
+  margin-left: 20px;
+  /* Imaginea va fi aliniată la dreapta, fără alte distanțări */
+}
+
+/* Media Queries pentru dispozitive mici */
+@media (max-width: 768px) {
+  .product {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .product-placeholder {
+    margin-left: 20px;
+  }
+
+  .product-info {
+    text-align: left;
+  }
+}

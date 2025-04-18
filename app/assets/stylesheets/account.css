@@ -1,0 +1,119 @@
+/* Container pentru formulare */
+.form-container {
+    font-family:Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px; /* thickness of the gradient line */
+    width: 100%;
+    background: linear-gradient(to right, #e2ad5f, #ffd582);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.form-container:hover{
+    transform: translateY(-5px);
+}
+
+/* Butoane de schimbare între login și signup */
+.form-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    font-size: 16px;
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.tab-button.active {
+    background: linear-gradient(to right, #e2ad5f, #ffd582);
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.tab-button:hover {
+    background: linear-gradient(to left, #e2ad5f, #ffd582);
+}
+
+/* Formulare */
+.form-section {
+    display: none;
+}
+
+.form-section input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-section button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e2ad5f;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-section button:hover {
+    background-color: #d57373;
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Display default for Login form */
+#login-form {
+    display: block;
+}
+
+.form-input {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+/* Bordiură roșie când inputul este invalid */
+.form-input:invalid {
+  border-color: rgb(0, 0, 0);
+
+}
+
+.form-input:focus {
+  border-color: #e2ad5f;
+  outline: none;
+}
+

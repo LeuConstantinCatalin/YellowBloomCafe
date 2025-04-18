@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie</title>
+  <%= stylesheet_link_tag 'gallery', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+  <div class="galerie-page">
+    <% ["Exterior", "Interior", "Pisici"].each do |sectiune| %>
+      <div class="galerie-section card collapsible">
+        <div class="galerie-header">
+          <strong><%= sectiune %></strong>
+          <button class="toggle-btn" onclick="toggleSection(this)">▼</button>
+        </div>
+        <div class="galerie-preview">
+          <div class="preview-box"></div>
+          <div class="preview-box"></div>
+          <div class="preview-box"></div>
+        </div>
+        <div class="galerie-content">
+          <% 6.times do %>
+            <div class="galerie-image"></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <script>
+ function toggleSection(button) {
+  const section = button.closest('.galerie-section');
+  const content = section.querySelector('.galerie-content');
+  const isOpen = content.classList.contains('open');
+
+  content.classList.toggle('open');
+  section.classList.toggle('open'); // asta e nouă
+  button.textContent = isOpen ? '▼' : '▲';
+  content.style.maxHeight = isOpen ? '0' : content.scrollHeight + 'px';
+}
+</script>
+</body>
+</html>

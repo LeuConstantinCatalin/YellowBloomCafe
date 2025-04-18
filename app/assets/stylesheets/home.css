@@ -1,0 +1,83 @@
+/* Acasă - Pagina */
+.home-page {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Cardul existent */
+.card {
+  background-color: #f9f3ec;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  transition: ease-in-out 0.3s;
+}
+
+/* Hover pe card */
+.card:hover {
+  background-color: #e2d1c3;
+  scale: 1.02;
+  transition: ease-in-out 0.3s;
+}
+
+.intro,
+.regulament {
+  width: 100%;
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.footer p {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Placeholder imagine */
+.image-placeholder {
+  width: 100%;
+  background-color: #ccc;
+  height: 200px; /* Poți ajusta înălțimea după preferință */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  transition: ease-in-out 0.3s;
+  border-radius: 10px;
+}
+
+.image-placeholder:hover {
+  background-color: #b0b0b0;
+  scale: 1.02;
+  transition: ease-in-out 0.3s;
+}
+
+.placeholder {
+  font-size: 18px;
+}
+
+/* Media Queries pentru dispozitive mici */
+@media (max-width: 768px) {
+  .home-page {
+    padding: 10px;
+  }
+  
+  .card {
+    padding: 15px;
+  }
+}
