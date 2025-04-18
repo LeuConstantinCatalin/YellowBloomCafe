@@ -21,13 +21,11 @@
             </div>
         <% else %>
 
-        <!-- Butoane pentru schimbarea între Login și Signup -->
         <div class="form-tabs">
             <button class="tab-button active" onclick="showForm('login')">Logare</button>
             <button class="tab-button" onclick="showForm('signup')">Înregistrare</button>
         </div>
 
-        <!-- Formular Logare -->
         <div id="login-form" class="form-section">
             <h2>Logare</h2>
             <%= form_with(url: account_path, method: :post, local: true) do |f| %>
@@ -43,7 +41,6 @@
         <% end %>
         </div>
 
-        <!-- Formular Înregistrare -->
         <div id="signup-form" class="form-section" style="display: none;">
             <h2>Înregistrare</h2>
             <%= form_with(model: @user || User.new, local: true) do |f| %>
@@ -86,7 +83,6 @@
             <% end %>
         </div>
 
-        <!-- Mesaje de eroare -->
         <% if @error_message %>
             <div class="error-message">
                 <%= @error_message %>
@@ -99,7 +95,7 @@
             </div>
         <% end %>
 
-        <% end %> <!-- end if not logged in -->
+        <% end %>
 
     </div>
 

@@ -17,7 +17,6 @@ def create
     users = JSON.parse(File.read(file_path))
     user = users.find { |u| u["email"] == params[:email] }
     
-    # Verifică parola cu authenticate
     if user && User.authenticate(params[:email], params[:password])
       session[:user_email] = user["email"]
       redirect_to account_path, notice: "Autentificat cu succes"

@@ -1,4 +1,4 @@
-/* Container pentru formulare */
+
 .form-container {
     font-family:Arial, Helvetica, sans-serif;
     max-width: 400px;
@@ -16,7 +16,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 5px; /* thickness of the gradient line */
+    height: 5px; 
     width: 100%;
     background: linear-gradient(to right, #e2ad5f, #ffd582);
     border-top-left-radius: 8px;
@@ -27,7 +27,6 @@
     transform: translateY(-5px);
 }
 
-/* Butoane de schimbare între login și signup */
 .form-tabs {
     display: flex;
     justify-content: space-between;
@@ -55,7 +54,6 @@
     background: linear-gradient(to left, #e2ad5f, #ffd582);
 }
 
-/* Formulare */
 .form-section {
     display: none;
 }
@@ -93,27 +91,25 @@
     margin-bottom: 15px;
 }
 
-/* Display default for Login form */
 #login-form {
     display: block;
 }
 
 .form-input {
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  padding: 8px;
-  width: 100%;
-  transition: border-color 0.3s ease;
-}
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    }
 
-/* Bordiură roșie când inputul este invalid */
 .form-input:invalid {
-  border-color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
 
 }
 
 .form-input:focus {
-  border-color: #e2ad5f;
-  outline: none;
+    border-color: #e2ad5f;
+    outline: none;
 }
 

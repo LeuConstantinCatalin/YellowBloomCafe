@@ -1,4 +1,3 @@
-/* Meniu - Pagina */
 .menu-page {
   padding: 20px;
   display: flex;
@@ -6,7 +5,6 @@
   gap: 30px;
 }
 
-/* Cardul pentru fiecare sectiune (Cafea, Prajituri) */
 .menu-section {
   background-color: #f9f3ec;
   padding: 20px;
@@ -23,7 +21,6 @@
   transition: ease-in-out 0.3s;
 }
 
-/* Headerul sectiunii */
 .menu-header {
   display: flex;
   justify-content: space-between;
@@ -32,7 +29,6 @@
   color: #333;
 }
 
-/* Butonul de "Deschidere" (la sectiune) */
 .toggle-btn {
   background-color: #d57373;
   color: white;
@@ -48,7 +44,6 @@
   background-color: #e2ad5f;
 }
 
-/* Contenutul sectiunii */
 .menu-content {
   display: block;
   max-height: 0;
@@ -61,7 +56,6 @@
   max-height: 500px;
 }
 
-/* Produse in sectiuni (Cafea, Prajiturile etc.) */
 .menu-content ul {
   list-style-type: none;
   padding-left: 0;
@@ -84,7 +78,6 @@
   background-color:rgb(255, 255, 255);
 }
 
-/* Placeholder imagine pentru produse */
 .product-placeholder {
   width: 160px;
   height: 160px;
@@ -98,13 +91,12 @@
   background-color: #b0b0b0;
 }
 
-/* Info produs (nume, ingrediente, preț) */
 .product-info {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
-  flex: 1; /* ocupă restul lățimii disponibile */
+  flex: 1;
 }
 
 .product-name {
@@ -123,7 +115,6 @@
   color: #e2ad5f;
 }
 
-/* Alinierea elementelor: textul la stânga, imaginea la dreapta */
 .product {
   display: flex;
   justify-content: space-between;
@@ -132,15 +123,13 @@
 }
 
 .product-info {
-  text-align: left;  /* Aliniem textul la stânga */
+  text-align: left;
 }
 
 .product-placeholder {
   margin-left: 20px;
-  /* Imaginea va fi aliniată la dreapta, fără alte distanțări */
 }
 
-/* Media Queries pentru dispozitive mici */
 @media (max-width: 768px) {
   .product {
     flex-direction: row;

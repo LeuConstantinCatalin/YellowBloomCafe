@@ -5,13 +5,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.tip = "client"  # Presupunând că "tip" este un câmp de tip string sau similar
+    @user.tip = "client"
 
     if @user.save
-      flash[:notice] = "User created successfully"  # Mesajul de succes
-      redirect_to root_path  # Redirecționează la homepage, folosind root_path
+      flash[:notice] = "User created successfully"
+      redirect_to root_path
     else
-      render :new  # Răspunde cu formularul de înregistrare, dacă există erori
+      render :new
     end
   end
 

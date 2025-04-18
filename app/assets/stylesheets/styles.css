@@ -1,4 +1,3 @@
-/* ========== RESET & BASE ========== */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +9,6 @@ html, body {
   font-family: Arial, sans-serif;
 }
 
-/* ========== NAVBAR ========== */
 .navbar {
   background: linear-gradient(to left, #e2ad5f, #d57373);
   background-size: 200% 100%;
@@ -97,14 +95,13 @@ html, body {
   width: 100%;
 }
 
-/* ========== NAV LINKS ========== */
 .navbar-logo {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 6px;
   justify-content: flex-start;
-  padding-left: 30px; /* adaugă padding în loc de transformări */
+  padding-left: 30px;
 }
 
 .navbar-links {
@@ -156,7 +153,6 @@ html, body {
   font-weight: bold;
 }
 
-/* ========== HAMBURGER ========== */
 .hamburger {
   font-size: 28px;
   background: none;
@@ -176,13 +172,11 @@ html, body {
   outline: none;
 }
 
-/* ========== PAGE LAYOUT ========== */
 .page-layout {
   display: flex;
   height: calc(100vh - 60px);
 }
 
-/* ========== SIDEBAR ========== */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -212,7 +206,6 @@ html, body {
   margin-top: auto;
 }
 
-/* ========== MAIN CONTENT ========== */
 .content {
   flex: 1;
   padding: 20px;
@@ -220,7 +213,6 @@ html, body {
   background-color: #fff;
 }
 
-/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;

@@ -35,7 +35,7 @@
   const isOpen = content.classList.contains('open');
 
   content.classList.toggle('open');
-  section.classList.toggle('open'); // asta e nouă
+  section.classList.toggle('open');
   button.textContent = isOpen ? '▼' : '▲';
   content.style.maxHeight = isOpen ? '0' : content.scrollHeight + 'px';
 }

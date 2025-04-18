@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panou Angajat - Cat Cafeteria</title>
   
-  <!-- Link către fișierul CSS -->
+
   <%= stylesheet_link_tag 'employee_controls', media: 'all', 'data-turbo-track': 'reload' %>
 </head>
 <body>
@@ -13,7 +13,7 @@
   <div class="employee-dashboard">
     <main class="employee-content">
 
- <!-- 📦 Comenzi -->
+
 <section id="sectiunea-comenzi" class="section-content">
   <h2>📦 Comenzi</h2>
   
@@ -49,7 +49,6 @@
   </div>
 </section>
 
- <!-- 🍰 Produse indisponibile -->
 <section id="sectiunea-produse" class="section-content">
   <h2>🍰 Produse indisponibile</h2>
 
@@ -100,7 +99,6 @@
 </section>
 
 
-       <!-- 🐱 Pisici -->
 <section id="sectiunea-pisici" class="section-content">
   <h2>🐱 Pisici</h2>
 
@@ -135,7 +133,6 @@
   </div>
 </section>
 
-<!-- 📅 Mese -->
 <section id="sectiunea-mese" class="section-content">
   <h2>📅 Mese</h2>
 
@@ -183,7 +180,6 @@
 </section>
 
 <script>
-  // Functie pentru actualizarea textului statusului
   function updateStatus(masaId) {
     const statusMasa = document.querySelector(`#status-masa-${masaId}`);
     const selectedStatus = document.querySelector(`input[name="status_masa_${masaId}"]:checked`).value;
@@ -201,12 +197,10 @@
     }
   }
 
-  // Functie pentru a arata formularul de rezervare
   function showReservationForm(masaId) {
     document.querySelector(`#reservation-list-${masaId}`).style.display = 'block';
   }
 
-  // Functie pentru a adauga o noua rezervare
   function addReservation(masaId) {
     const reservationList = document.querySelector(`#reservation-list-${masaId}`);
     const newReservation = document.createElement('div');
@@ -220,8 +214,6 @@
   }
 </script>
 
-
-<!-- 💬 Mesaje -->
 <section id="sectiunea-mesaje" class="section-content">
   <h2>💬 Mesaje</h2>
 
@@ -255,7 +247,6 @@
   </div>
 
   <script>
-    // Scroll lin către secțiuni
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
