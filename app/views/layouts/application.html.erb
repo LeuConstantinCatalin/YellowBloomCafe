@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Cafeteria</title>
     <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbo-track': 'reload' %>
-</head>
+    <% if defined?(employee_path) && current_page?(employee_path) %>
+      <%= stylesheet_link_tag 'employee_sidebar', media: 'all', 'data-turbo-track': 'reload' %>
+    <% end %>
+  </head>
 <body>
   <nav class="navbar">
     <div class="container">
@@ -17,7 +20,7 @@
         <button class="hamburger" onclick="toggleNavbar()">☰</button>
       </div>
       <div class="navbar-links">
-        <a href="<%= angajat_path %>" class="<%= 'active' if current_page?(angajat_path) %>">tmpAngajat</a>
+        <a href="<%= employee_path %>" class="<%= 'active' if current_page?(employee_path) %>">Angajat</a>
         <a href="<%= root_path %>" class="<%= 'active' if current_page?(root_path) %>">Acasa</a>
         <a href="<%= menu_path %>" class="<%= 'active' if current_page?(menu_path) %>">Meniu</a>
         <a href="<%= gallery_path %>" class="<%= 'active' if current_page?(gallery_path) %>">Galerie</a>
@@ -27,7 +30,7 @@
   </nav>
 
   <div class="page-layout">
-    <% if current_page?(angajat_path) %>
+    <% if current_page?(employee_path) %>
       <%= render 'layouts/employee_sidebar' %>
     <% else %>
       <aside class="sidebar">
@@ -66,3 +69,4 @@
     </script>
   </body>
 </html>
+

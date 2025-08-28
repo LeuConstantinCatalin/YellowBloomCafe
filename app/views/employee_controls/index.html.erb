@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panou Angajat - YellowBloom</title>
+  <%= stylesheet_link_tag 'employee_controls', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+  <div class="employee-dashboard">
+    <main class="employee-content">
+
+      <% if flash[:notice] %>
+        <div class="section-content" style="background:#eaf7ea; border-left:4px solid #2ecc71;">
+          <p><%= flash[:notice] %></p>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="section-content" style="background:#fdecea; border-left:4px solid #e74c3c;">
+          <p><%= flash[:alert] %></p>
+        </div>
+      <% end %>
+
+      <section id="sectiunea-stocuri" class="section-content">
+        <h2>Stoc ingrediente</h2>
+
+        <div>
+          <% @ingredients.each do |ing| %>
+            <div class="comanda-card" style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+              <div>
+                <h3 style="margin:0 0 6px 0;"><%= ing.name %></h3>
+                <p style="margin:0; color:#555;">Unitate: <%= ing.unit %></p>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <%= form_with url: employee_ingredient_path(ing), method: :patch, local: true do |f| %>
+                  <%= f.number_field :stock_quantity, value: ing.stock_quantity, step: :any, min: 0, class: "form-input", style: "width:140px;" %>
+                  <button type="submit" class="form-button" style="margin-left:8px;">Actualizează</button>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section id="sectiunea-pisici" class="section-content">
+        <h2>Pisici</h2>
+        <div class="pisica-card">
+          <h3>Mitzi</h3>
+          <p>Status: Activă</p>
+        </div>
+        <div class="pisica-card">
+          <h3>Luna</h3>
+          <p>Status: Somn</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
+

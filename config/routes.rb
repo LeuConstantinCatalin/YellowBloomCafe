@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get "gallery", to: "gallery#index"
   get "account", to: "account#index"
 
-  get "angajat", to: "angajat_controls#index"
+  # Employee dashboard
+  get "employee", to: "employee_controls#index", as: :employee
+  patch "employee/ingredients/:id", to: "employee_controls#update_ingredient", as: :employee_ingredient
 
   resources :users, only: [:create]
   resources :account, only: [:index, :create]
