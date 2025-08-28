@@ -32,8 +32,8 @@
                 <p style="margin:0; color:#555;">Unitate: <%= ing.unit %></p>
               </div>
               <div style="display:flex; align-items:center; gap:10px;">
-                <%= form_with url: employee_ingredient_path(ing), method: :patch, local: true do |f| %>
-                  <%= f.number_field :stock_quantity, value: ing.stock_quantity, step: :any, min: 0, class: "form-input", style: "width:140px;" %>
+                <%= form_with model: ing, url: employee_ingredient_path(ing), method: :patch, local: true do |f| %>
+                  <%= f.number_field :stock_quantity, step: :any, min: 0, class: "form-input", style: "width:140px;" %>
                   <button type="submit" class="form-button" style="margin-left:8px;">Actualizează</button>
                 <% end %>
               </div>
@@ -58,4 +58,3 @@
   </div>
 </body>
 </html>
-
