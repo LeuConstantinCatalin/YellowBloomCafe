@@ -113,3 +113,16 @@
     outline: none;
 }
 
+.confirm-section {
+    margin-top: 15px;
+    padding-top: 5px;
+}
+
+.confirm-section.show {
+    animation: fadeInUp 0.25s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}

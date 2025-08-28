@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificare email</title>
+  <%= stylesheet_link_tag 'account', media: 'all', 'data-turbo-track': 'reload' %>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-section" style="display: block;">
+      <h2>Verificare email</h2>
+
+      <% if flash[:notice] %>
+        <div class="form-group"><p><%= flash[:notice] %></p></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="form-group"><p style="color:#c00"><%= flash[:alert] %></p></div>
+      <% end %>
+
+      <% if @user %>
+        <p>Am trimis un cod de verificare către <strong><%= @user.email %></strong>.</p>
+        <p>Introdu codul mai jos pentru a confirma adresa.</p>
+
+        <%= form_with url: verify_email_path, method: :post, local: true do |f| %>
+          <div class="form-group">
+            <%= label_tag :code, "Cod de verificare" %>
+            <%= text_field_tag :code, nil, class: "form-input", placeholder: "ex: 123456", required: true %>
+          </div>
+          <button type="submit" class="form-button">Confirmă</button>
+        <% end %>
+
+        <%= form_with url: resend_verification_path, method: :post, local: true do |f| %>
+          <button type="submit" class="form-button" style="margin-top:10px;">Retrimite codul</button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>
+

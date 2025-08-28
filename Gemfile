@@ -65,6 +65,10 @@ group :development do
   # Add guard-livereload and rack-livereload for automatic browser refresh
   gem "guard-livereload"
   gem "rack-livereload"
+
+  # Preview emails in the browser instead of sending
+  gem "letter_opener"
+  gem "letter_opener_web"
 end
 
 group :test do

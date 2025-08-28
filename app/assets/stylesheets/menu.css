@@ -115,6 +115,12 @@
   color: #e2ad5f;
 }
 
+.product-status.unavailable {
+  color: #c0392b;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
 .product {
   display: flex;
   justify-content: space-between;

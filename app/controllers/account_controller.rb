@@ -1,52 +1,71 @@
 class AccountController < ApplicationController
-  require 'json'
-
   def index
     @user = User.new
-    file_path = Rails.root.join("storage", "users.json")
+  end
 
-    if session[:user_email] && File.exist?(file_path)
-      users = JSON.parse(File.read(file_path))
-      @current_user = users.find { |u| u["email"] == session[:user_email] }
+  def create
+    user = User.find_by(email: params[:email])
+
+    if user && user.authenticate(params[:password])
+      if user.respond_to?(:email_verified) && !user.email_verified
+        session[:pending_user_id] = user.id
+        send_verification_code(user)
+        redirect_to verify_email_path, notice: "Cont neconfirmat. Am trimis un cod de verificare."
+      else
+        session[:user_id] = user.id
+        redirect_to account_path, notice: "Autentificat cu succes"
+      end
+    else
+      @user = User.new
+      @error_message = "Email sau parola incorecte"
+      render :index
     end
   end
 
-def create
-  file_path = Rails.root.join("storage", "users.json")
-  if File.exist?(file_path)
-    users = JSON.parse(File.read(file_path))
-    user = users.find { |u| u["email"] == params[:email] }
-    
-    if user && User.authenticate(params[:email], params[:password])
-      session[:user_email] = user["email"]
-      redirect_to account_path, notice: "Autentificat cu succes"
-      return
+  def update
+    unless current_user
+      redirect_to account_path, alert: "Trebuie sa fii autentificat." and return
+    end
+
+    if current_user.update(account_update_params)
+      redirect_to account_path, notice: "Profil actualizat."
+    else
+      @user = User.new
+      @update_errors = current_user.errors.full_messages
+      render :index, status: :unprocessable_entity
     end
   end
 
-  @user = User.new
-  @error_message = "Email sau parolă incorecte"
-  render :index
-end
+  def logout
+    reset_session
+    redirect_to account_path, notice: "Delogat cu succes"
+  end
 
-  def signup
-    user_data = {
-      username: params[:username],
-      nume: params[:nume],
-      prenume: params[:prenume],
-      data_nastere: params[:data_nastere],
-      email: params[:email],
-      password: params[:password]
-    }
+  def destroy
+    unless current_user
+      redirect_to account_path, alert: "Trebuie sa fii autentificat." and return
+    end
 
-    file_path = Rails.root.join("storage", "users.json")
-    FileUtils.mkdir_p(File.dirname(file_path)) unless File.exist?(file_path)
+    current_user.destroy!
+    reset_session
+    redirect_to root_path, notice: "Contul a fost sters."
+  end
 
-    users = File.exist?(file_path) ? JSON.parse(File.read(file_path)) : []
-    users << user_data
-    File.write(file_path, JSON.pretty_generate(users))
+  private
 
-    session[:user_email] = user_data[:email]
-    redirect_to account_path, notice: "Cont creat cu succes!"
+  def generate_code
+    "%06d" % SecureRandom.random_number(1_000_000)
+  end
+
+  def send_verification_code(user)
+    code = generate_code
+    user.update!(email_verification_code: code, email_verification_sent_at: Time.current, email_verified: false)
+    UserMailer.with(user: user, code: code).email_verification.deliver_now
+  end
+
+  def account_update_params
+    params.require(:user).permit(:username, :nume, :prenume, :data_nastere, :adresa)
   end
 end
+
+
