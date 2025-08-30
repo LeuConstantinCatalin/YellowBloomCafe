@@ -176,3 +176,28 @@ tables.each do |attrs|
 end
 
 puts "Mese create/actualizate: #{DiningTable.count}"
+
+# ----------------------------------------
+# Utilizatori de test pe roluri
+# ----------------------------------------
+puts "Seeding utilizatori de test..."
+
+def upsert_user(attrs)
+  u = User.find_or_initialize_by(email: attrs[:email])
+  u.username = attrs[:username]
+  u.nume = attrs[:nume]
+  u.prenume = attrs[:prenume]
+  u.password = attrs[:password]
+  u.password_confirmation = attrs[:password]
+  u.tip = attrs[:tip]
+  u.email_verified = true
+  u.save!
+  u
+end
+
+upsert_user(username: 'client1',  nume: 'Popescu', prenume: 'Ana',   email: 'client1@example.com',  password: 'parola123', tip: 'client')
+upsert_user(username: 'angajat1', nume: 'Ionescu', prenume: 'Mihai', email: 'angajat1@example.com', password: 'parola123', tip: 'angajat')
+upsert_user(username: 'manager1', nume: 'Vasilescu', prenume: 'Ioana', email: 'manager1@example.com', password: 'parola123', tip: 'manager')
+upsert_user(username: 'admin1',   nume: 'Georgescu', prenume: 'Radu', email: 'admin1@example.com',   password: 'parola123', tip: 'admin')
+
+puts "Utilizatori de test creati/actualizati: #{User.where(email: ['client1@example.com','angajat1@example.com','manager1@example.com','admin1@example.com']).count}"

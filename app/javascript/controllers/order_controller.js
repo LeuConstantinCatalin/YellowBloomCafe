@@ -111,7 +111,8 @@ export default class extends Controller {
 
   // Inject or remove + buttons for each product in menu
   renderAddButtons() {
-    const productLis = document.querySelectorAll('.menu-content li')
+    // Be robust to markup: select by id prefix if possible
+    const productLis = document.querySelectorAll('li[id^="product-"]')
     productLis.forEach(li => {
       const placeholder = li.querySelector('.product-placeholder')
       if (!placeholder) return

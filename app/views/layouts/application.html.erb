@@ -7,7 +7,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbo-track': 'reload' %>
-    <% if defined?(employee_path) && current_page?(employee_path) %>
+    <% if (defined?(employee_path) && current_page?(employee_path)) || (defined?(manager_path) && current_page?(manager_path)) || (defined?(admin_path) && current_page?(admin_path)) %>
       <%= stylesheet_link_tag 'employee_sidebar', media: 'all', 'data-turbo-track': 'reload' %>
     <% end %>
     <%# Legarea CSS-ului pentru sidebarul de meniu se face direct din partialul sidebar %>
@@ -25,11 +25,30 @@
         <button class="hamburger" onclick="toggleNavbar()">☰</button>
       </div>
       <div class="navbar-links">
-        <a href="<%= employee_path %>" class="<%= 'active' if current_page?(employee_path) %>">Angajat</a>
-        <a href="<%= root_path %>" class="<%= 'active' if current_page?(root_path) %>">Acasa</a>
-        <a href="<%= menu_path %>" class="<%= 'active' if current_page?(menu_path) %>">Meniu</a>
-        <a href="<%= gallery_path %>" class="<%= 'active' if current_page?(gallery_path) %>">Galerie</a>
-        <a href="<%= account_path %>" class="<%= 'active' if current_page?(account_path) %>">Cont</a>
+        <% if current_user&.employee? %>
+          <a href="<%= employee_path %>" class="<%= 'active' if current_page?(employee_path) %>">Angajat</a>
+          <a href="<%= account_path %>" class="<%= 'active' if current_page?(account_path) %>">Cont</a>
+        <% elsif current_user&.manager? %>
+          <a href="<%= employee_path %>" class="<%= 'active' if current_page?(employee_path) %>">Angajat</a>
+          <a href="<%= manager_path %>" class="<%= 'active' if current_page?(manager_path) %>">Manager</a>
+          <a href="<%= root_path %>" class="<%= 'active' if current_page?(root_path) %>">Acasa</a>
+          <a href="<%= menu_path %>" class="<%= 'active' if current_page?(menu_path) %>">Meniu</a>
+          <a href="<%= gallery_path %>" class="<%= 'active' if current_page?(gallery_path) %>">Galerie</a>
+          <a href="<%= account_path %>" class="<%= 'active' if current_page?(account_path) %>">Cont</a>
+        <% elsif current_user&.admin? %>
+          <a href="<%= employee_path %>" class="<%= 'active' if current_page?(employee_path) %>">Angajat</a>
+          <a href="<%= manager_path %>" class="<%= 'active' if current_page?(manager_path) %>">Manager</a>
+          <a href="<%= admin_path %>" class="<%= 'active' if current_page?(admin_path) %>">Admin</a>
+          <a href="<%= root_path %>" class="<%= 'active' if current_page?(root_path) %>">Acasa</a>
+          <a href="<%= menu_path %>" class="<%= 'active' if current_page?(menu_path) %>">Meniu</a>
+          <a href="<%= gallery_path %>" class="<%= 'active' if current_page?(gallery_path) %>">Galerie</a>
+          <a href="<%= account_path %>" class="<%= 'active' if current_page?(account_path) %>">Cont</a>
+        <% else %>
+          <a href="<%= root_path %>" class="<%= 'active' if current_page?(root_path) %>">Acasa</a>
+          <a href="<%= menu_path %>" class="<%= 'active' if current_page?(menu_path) %>">Meniu</a>
+          <a href="<%= gallery_path %>" class="<%= 'active' if current_page?(gallery_path) %>">Galerie</a>
+          <a href="<%= account_path %>" class="<%= 'active' if current_page?(account_path) %>">Cont</a>
+        <% end %>
       </div>
     </div>
   </nav>
@@ -37,6 +56,10 @@
   <div class="page-layout">
     <% if current_page?(employee_path) %>
       <%= render 'layouts/employee_sidebar' %>
+    <% elsif defined?(manager_path) && current_page?(manager_path) %>
+      <%= render 'layouts/manager_sidebar' %>
+    <% elsif defined?(admin_path) && current_page?(admin_path) %>
+      <%= render 'layouts/admin_sidebar' %>
     <% elsif current_page?(menu_path) && current_user %>
       <%= render 'layouts/order_sidebar' %>
     <% else %>

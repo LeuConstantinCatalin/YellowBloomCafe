@@ -293,3 +293,5 @@ button#add-reservation-1:hover, button#add-reservation-2:hover, button#add-reser
 .ml-8 { margin-left: 8px; }
 .reservation-request-item { padding:6px 8px; border:1px solid #eee; border-radius:6px; margin-bottom:8px; background:#fff; cursor: grab; }
 .reservation-request-item:active { cursor: grabbing; }
+
+#sectiunea-pisici { display: none !important; }

@@ -1,0 +1,50 @@
+<div class="employee-dashboard">
+  <main class="employee-content">
+
+      <% if flash[:notice] %>
+        <div class="section-content" style="background:#eaf7ea; border-left:4px solid #2ecc71;">
+          <p><%= flash[:notice] %></p>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="section-content" style="background:#fdecea; border-left:4px solid #e74c3c;">
+          <p><%= flash[:alert] %></p>
+        </div>
+      <% end %>
+
+    <section id="sectiunea-statistici" class="section-content">
+        <h2>Statistici de performanță</h2>
+        <div class="comanda-card">
+          <ul style="margin:0 0 0 16px;">
+            <li>Utilizatori total: <strong><%= @stats[:users_total] %></strong></li>
+            <li>Utilizatori pe rol: <strong><%= @stats[:users_by_role].map{|k,v| "#{k}: #{v}"}.join(', ') %></strong></li>
+            <li>Produse: <strong><%= @stats[:products_total] %></strong> | Ingrediente: <strong><%= @stats[:ingredients_total] %></strong></li>
+            <li>Comenzi: total <strong><%= @stats[:orders_total] %></strong> | în așteptare <strong><%= @stats[:orders_pending] %></strong> | finalizate <strong><%= @stats[:orders_completed] %></strong></li>
+            <li>Rezervări: total <strong><%= @stats[:reservations_total] %></strong> | solicitate <strong><%= @stats[:reservations_requested] %></strong></li>
+          </ul>
+        </div>
+    </section>
+
+    <section id="sectiunea-utilizatori" class="section-content">
+        <h2>Creează conturi</h2>
+        <div class="comanda-card">
+          <h3>Angajat sau Manager</h3>
+          <%= form_with url: admin_users_path, method: :post, local: true do |f| %>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <select name="user[tip]" class="form-input" required>
+                <option value="angajat">Angajat</option>
+                <option value="manager">Manager</option>
+              </select>
+              <input type="text" name="user[username]" placeholder="Username" class="form-input" required />
+              <input type="text" name="user[nume]" placeholder="Nume" class="form-input" required />
+              <input type="text" name="user[prenume]" placeholder="Prenume" class="form-input" required />
+              <input type="email" name="user[email]" placeholder="Email" class="form-input" required />
+              <input type="password" name="user[password]" placeholder="Parola" class="form-input" required />
+              <input type="password" name="user[password_confirmation]" placeholder="Confirma parola" class="form-input" required />
+              <button type="submit" class="form-button">Creeaza</button>
+            </div>
+          <% end %>
+        </div>
+    </section>
+  </main>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_29_123100) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_30_233002) do
   create_table "dining_tables", force: :cascade do |t|
     t.string "name", null: false
     t.integer "seats", default: 2, null: false
@@ -26,6 +26,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_123100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_ingredients_on_name", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "subject"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -88,6 +97,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_123100) do
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "rating", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "nume"
@@ -104,6 +122,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_123100) do
     t.datetime "email_verification_sent_at"
   end
 
+  add_foreign_key "messages", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
@@ -111,4 +130,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_123100) do
   add_foreign_key "product_ingredients", "products"
   add_foreign_key "reservations", "dining_tables"
   add_foreign_key "reservations", "users"
+  add_foreign_key "reviews", "users"
 end

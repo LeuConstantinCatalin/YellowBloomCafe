@@ -75,6 +75,23 @@
         </div>
       </section>
 
+      <section id="sectiunea-retete" class="section-content">
+        <h2>Rețete</h2>
+        <div class="orders-list">
+          <% @products.each do |p| %>
+            <div class="comanda-card">
+              <h3 style="margin:0 0 6px;"><%= p.name %> (<%= p.category %>)</h3>
+              <p style="margin:0 0 6px; color:#555;">Preț: <strong><%= number_with_precision(p.price, precision: 2) %> lei</strong></p>
+              <ul style="margin:0 0 0 16px;">
+                <% p.product_ingredients.includes(:ingredient).each do |pi| %>
+                  <li><%= pi.ingredient&.name %>: <strong><%= pi.quantity %> <%= pi.ingredient&.unit %></strong></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
       <section id="sectiunea-pisici" class="section-content">
         <h2>Pisici</h2>
         <div class="pisica-card">

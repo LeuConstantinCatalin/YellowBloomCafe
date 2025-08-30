@@ -15,6 +15,18 @@ Rails.application.routes.draw do
   patch "employee/reservations/:id/assign", to: "employee_controls#assign_reservation", as: :employee_assign_reservation
   patch "employee/reservations/:id/complete", to: "employee_controls#complete_reservation", as: :employee_complete_reservation
 
+  # Manager dashboard
+  get "manager", to: "manager#index", as: :manager
+  post "manager/products", to: "manager#create_product", as: :manager_products
+  patch "manager/products/:id", to: "manager#update_product", as: :manager_product
+  post "manager/recipes", to: "manager#add_recipe_item", as: :manager_recipes
+  delete "manager/recipes/:id", to: "manager#remove_recipe_item", as: :manager_recipe
+  post "manager/employees", to: "manager#create_employee", as: :manager_employees
+
+  # Admin dashboard
+  get "admin", to: "admin#index", as: :admin
+  post "admin/users", to: "admin#create_user", as: :admin_users
+
   resources :users, only: [:create]
   resources :account, only: [:index, :create]
   patch "account", to: "account#update"
@@ -24,6 +36,8 @@ Rails.application.routes.draw do
   # Orders
   resources :orders, only: [:create]
   resources :reservations, only: [:create]
+  resources :messages, only: [:create]
+  resources :reviews, only: [:create]
 
   # Email verification flow
   get  "verify_email", to: "email_verifications#new",    as: :verify_email

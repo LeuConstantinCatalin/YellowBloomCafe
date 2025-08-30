@@ -1,4 +1,5 @@
 class MenuController < ApplicationController
+  before_action :redirect_employee_to_dashboard, if: -> { current_user&.employee? }
   def index
     products = Product.includes(product_ingredients: :ingredient).all
 

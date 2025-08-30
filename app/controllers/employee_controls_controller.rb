@@ -1,6 +1,8 @@
 class EmployeeControlsController < ApplicationController
+  before_action -> { require_roles('angajat','manager','admin') }
   def index
     @ingredients = Ingredient.order(:name)
+    @products = Product.includes(product_ingredients: :ingredient).order(:category, :name)
     @orders = Order.includes(order_items: :product).where(status: ["pending", "confirmed"]).order(created_at: :desc)
     @dining_tables = DiningTable.includes(:reservations).order(:name)
     @reservation_requests = Reservation.where(status: 'requested').order(:starts_at)

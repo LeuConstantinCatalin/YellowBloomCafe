@@ -2,13 +2,14 @@
   <%= stylesheet_link_tag 'employee_sidebar', media: 'all', 'data-turbo-track': 'reload' %>
 </head>
 <aside class="employee-sidebar">
-  <h2>Panou Angajat</h2>
+  <h2>Panou Manager</h2>
   <ul>
-    <li><a href="#sectiunea-comenzi">Comenzi</a></li>
-    <li><a href="#sectiunea-stocuri">Stoc ingrediente</a></li>
-    <li><a href="#sectiunea-pisici">Pisici</a></li>
-    <li><a href="#sectiunea-mese">Mese</a></li>
+    <li><a href="#sectiunea-produse">Produse</a></li>
+    <li><a href="#sectiunea-retete">Rețete</a></li>
+    <li><a href="#sectiunea-utilizatori">Utilizatori</a></li>
+    <li><a href="#sectiunea-recenzii">Recenzii</a></li>
     <li><a href="#sectiunea-mesaje">Mesaje</a></li>
+    <li><a href="#sectiunea-statistici">Statistici</a></li>
     <% if current_user %>
       <li>
         <form method="post" action="<%= logout_path %>">

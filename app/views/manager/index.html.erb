@@ -1,0 +1,139 @@
+<div class="employee-dashboard">
+  <main class="employee-content">
+
+      <% if flash[:notice] %>
+        <div class="section-content" style="background:#eaf7ea; border-left:4px solid #2ecc71;">
+          <p><%= flash[:notice] %></p>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="section-content" style="background:#fdecea; border-left:4px solid #e74c3c;">
+          <p><%= flash[:alert] %></p>
+        </div>
+      <% end %>
+
+      <%# Eliminat sectiunea Produse (redundant) %>
+
+      <section id="sectiunea-retete" class="section-content">
+        <h2>Rețete</h2>
+        <div class="orders-list">
+          <% @products.each do |p| %>
+            <div class="comanda-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+                <h3 style="margin:0;"><%= p.name %> (<%= p.category %>)</h3>
+                <%= form_with model: p, url: manager_product_path(p), method: :patch, local: true do |f| %>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <label style="color:#555;">Preț:</label>
+                    <%= f.number_field :price, step: :any, min: 0, class: 'form-input', style: 'width:120px;' %>
+                    <button type="submit" class="form-button">Salvează</button>
+                  </div>
+                <% end %>
+              </div>
+
+              <div style="margin-top:8px;">
+                <h4 style="margin:0 0 6px;">Ingrediente</h4>
+                <% p.product_ingredients.includes(:ingredient).each do |pi| %>
+                  <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:6px;">
+                    <div>
+                      <strong><%= pi.ingredient&.name %></strong>
+                      <small style="color:#777;"> ( <%= pi.ingredient&.unit %> )</small>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <form action="<%= manager_recipes_path %>" method="post">
+                        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                        <input type="hidden" name="product_id" value="<%= p.id %>">
+                        <input type="hidden" name="ingredient_id" value="<%= pi.ingredient_id %>">
+                        <input type="number" name="quantity" step="any" min="0.01" class="form-input" value="<%= pi.quantity %>" style="width:120px;"/>
+                        <button type="submit" class="form-button">Actualizează</button>
+                      </form>
+                      <%= button_to 'Șterge', manager_recipe_path(pi), method: :delete, form: { class: 'inline-form' }, class: 'form-button', data: { turbo_confirm: 'Sigur ștergi acest ingredient din rețetă?' } %>
+                    </div>
+                  </div>
+                <% end %>
+
+                <div style="margin-top:8px;">
+                  <h5 style="margin:8px 0 6px;">Adaugă ingredient</h5>
+                  <form action="<%= manager_recipes_path %>" method="post" style="display:flex; gap:8px; align-items:center;">
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                    <input type="hidden" name="product_id" value="<%= p.id %>">
+                    <select name="ingredient_id" class="form-input" required style="min-width:160px;">
+                      <option value="">Ingredient...</option>
+                      <% @ingredients.each do |ing| %>
+                        <option value="<%= ing.id %>"><%= ing.name %> (<%= ing.unit %>)</option>
+                      <% end %>
+                    </select>
+                    <input type="number" name="quantity" step="any" min="0.01" class="form-input" placeholder="Cantitate" style="width:120px;" required />
+                    <button type="submit" class="form-button">Adaugă</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section id="sectiunea-utilizatori" class="section-content">
+        <h2>Utilizatori</h2>
+        <div class="comanda-card">
+          <h3>Creează cont angajat</h3>
+          <%= form_with url: manager_employees_path, method: :post, local: true do |f| %>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input type="text" name="user[username]" placeholder="Username" class="form-input" required />
+              <input type="text" name="user[nume]" placeholder="Nume" class="form-input" required />
+              <input type="text" name="user[prenume]" placeholder="Prenume" class="form-input" required />
+              <input type="email" name="user[email]" placeholder="Email" class="form-input" required />
+              <input type="password" name="user[password]" placeholder="Parola" class="form-input" required />
+              <input type="password" name="user[password_confirmation]" placeholder="Confirma parola" class="form-input" required />
+              <button type="submit" class="form-button">Creeaza</button>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section id="sectiunea-recenzii" class="section-content">
+        <h2>Recenzii clienți</h2>
+        <div class="orders-list">
+          <% Review.includes(:user).order(created_at: :desc).limit(20).each do |r| %>
+            <div class="comanda-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong><%= r.user&.username || r.user&.email %></strong>
+                <span>⭐ <%= r.rating %></span>
+              </div>
+              <p style="margin:8px 0 0; color:#555;"><%= r.content %></p>
+              <small style="color:#888;"> <%= r.created_at.strftime('%d.%m.%Y %H:%M') %> </small>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section id="sectiunea-mesaje" class="section-content">
+        <h2>Mesaje de la clienți</h2>
+        <div class="orders-list">
+          <% Message.includes(:user).order(created_at: :desc).limit(20).each do |m| %>
+            <div class="comanda-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong><%= m.subject.presence || 'Mesaj' %></strong>
+                <small><%= m.user&.username || m.user&.email %></small>
+              </div>
+              <p style="margin:8px 0 0; color:#555;"><%= m.content %></p>
+              <small style="color:#888;"> <%= m.created_at.strftime('%d.%m.%Y %H:%M') %> </small>
+            </div>
+          <% end %>
+        </div>
+      </section>
+
+      <section id="sectiunea-statistici" class="section-content">
+        <h2>Statistici</h2>
+        <div class="comanda-card">
+          <ul style="margin:0 0 0 16px;">
+            <li>Utilizatori total: <strong><%= @stats[:users_total] %></strong></li>
+            <li>Clienți: <strong><%= @stats[:users_clients] %></strong> | Angajați: <strong><%= @stats[:users_employees] %></strong> | Manageri: <strong><%= @stats[:users_managers] %></strong></li>
+            <li>Comenzi în așteptare: <strong><%= @stats[:orders_pending] %></strong></li>
+            <li>Comenzi azi: <strong><%= @stats[:orders_today] %></strong></li>
+            <li>Rezervări solicitate: <strong><%= @stats[:reservations_requested] %></strong></li>
+          </ul>
+        </div>
+      </section>
+
+  </main>
+</div>
