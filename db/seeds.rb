@@ -152,3 +152,27 @@ recipe_for(sm_piersici, {
 }, ingredient_records)
 
 puts "Gata seed!"
+
+# ----------------------------------------
+# Mese (Dining tables)
+# ----------------------------------------
+puts "Seeding mese..."
+
+tables = [
+  { name: "M1", seats: 2 },
+  { name: "M2", seats: 2 },
+  { name: "M3", seats: 2 },
+  { name: "M4", seats: 4 },
+  { name: "M5", seats: 4 },
+  { name: "M6", seats: 4 },
+  { name: "M7", seats: 6 },
+  { name: "M8", seats: 6 }
+]
+
+tables.each do |attrs|
+  dt = DiningTable.find_or_initialize_by(name: attrs[:name])
+  dt.seats = attrs[:seats]
+  dt.save!
+end
+
+puts "Mese create/actualizate: #{DiningTable.count}"

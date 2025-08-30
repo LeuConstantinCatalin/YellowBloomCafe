@@ -10,12 +10,20 @@ Rails.application.routes.draw do
   # Employee dashboard
   get "employee", to: "employee_controls#index", as: :employee
   patch "employee/ingredients/:id", to: "employee_controls#update_ingredient", as: :employee_ingredient
+  patch "employee/orders/:id/confirm", to: "employee_controls#confirm_order", as: :employee_confirm_order
+  patch "employee/orders/:id/complete", to: "employee_controls#complete_order", as: :employee_complete_order
+  patch "employee/reservations/:id/assign", to: "employee_controls#assign_reservation", as: :employee_assign_reservation
+  patch "employee/reservations/:id/complete", to: "employee_controls#complete_reservation", as: :employee_complete_reservation
 
   resources :users, only: [:create]
   resources :account, only: [:index, :create]
   patch "account", to: "account#update"
   delete "account", to: "account#destroy"
   post "logout", to: "account#logout", as: :logout
+
+  # Orders
+  resources :orders, only: [:create]
+  resources :reservations, only: [:create]
 
   # Email verification flow
   get  "verify_email", to: "email_verifications#new",    as: :verify_email

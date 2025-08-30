@@ -1,0 +1,15 @@
+Bună <%= @user.username || @user.email %>,
+
+Rezervarea ta a fost alocată.
+
+Masa: <%= @table.name %> (locuri: <%= @table.seats %>)
+Data: <%= @reservation.starts_at.strftime('%d.%m.%Y') %>
+Ora: <%= @reservation.starts_at.strftime('%H:%M') %> - <%= (@reservation.starts_at + @reservation.duration_minutes.minutes).strftime('%H:%M') %>
+Număr locuri: <%= @reservation.seats %>
+Durată: <%= @reservation.duration_minutes %> minute
+Status: <%= @reservation.status %>
+Adresă: <%= @user.adresa.presence || '-' %>
+
+Mulțumim,
+YellowBloom
+

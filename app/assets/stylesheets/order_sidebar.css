@@ -1,0 +1,37 @@
+/* Sidebar orders & reservations */
+.order-controls .btn { width: 100%; margin-bottom: 10px; }
+.cart h3 { margin-top: 10px; }
+.cart-items { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.cart-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 8px; background: #fafafa; border: 1px solid #eee; border-radius: 6px; }
+.cart-item .name { flex: 1; }
+.cart-item .qty { display: flex; align-items: center; gap: 6px; }
+.cart-item button { padding: 4px 8px; }
+.cart-total { margin: 10px 0; }
+.address-block { margin: 12px 0; }
+.form-input { width: 100%; padding: 8px; }
+.btn { background: #e2ad5f; color: #000; border: none; border-radius: 6px; padding: 8px 10px; cursor: pointer; }
+.btn:hover { opacity: 0.95; }
+.btn-primary { background: #000; color: #fff; }
+.btn-secondary { background: #ddd; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.my-orders-scroll { max-height: 220px; overflow-y: auto; border: 1px solid #eee; border-radius: 6px; padding: 8px; background: #fff; }
+.order-card { border: 1px solid #eee; border-radius: 6px; padding: 8px; margin-bottom: 8px; background: #fafafa; }
+.order-card-head { display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px; }
+.order-card-status { color: #555; margin-bottom: 6px; }
+.order-items { margin: 0 0 6px 16px; }
+.order-card-total { text-align: right; }
+.sb-card { margin-top: 12px; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+.sb-header { display:flex; justify-content:space-between; align-items:center; padding: 8px 10px; }
+.sb-content { padding: 8px 10px; overflow: hidden; max-height: 0; transition: max-height 0.25s ease; }
+.sb-content.open { max-height: 360px; }
+.sb-toggle-btn { padding: 2px 8px; }
+.reservation-block { margin-top: 16px; padding-top: 10px; border-top: 1px solid #eee; }
+.reservation-block .row { display:flex; flex-direction: column; margin-bottom: 8px; }
+.reservation-block label { font-size: 0.9rem; color: #555; margin-bottom: 4px; }
+
+/* Sidebar top info block */
+.sidebar-info { background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 10px; margin-bottom: 12px; }
+.sidebar-info.is-hidden { display: none; }
+.sidebar-subtitle { margin: 0 0 6px; font-size: 0.95rem; color: #333; }
+.sidebar-steps { margin: 0 0 6px 16px; color: #444; }
+.sidebar-steps li { margin: 2px 0; }

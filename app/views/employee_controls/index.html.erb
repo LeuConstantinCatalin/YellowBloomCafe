@@ -21,6 +21,39 @@
         </div>
       <% end %>
 
+      <section id="sectiunea-comenzi" class="section-content">
+        <h2>Comenzi</h2>
+        <% if @orders.blank? %>
+          <p>Nu există comenzi în așteptare.</p>
+        <% else %>
+          <div class="orders-list">
+            <% @orders.each do |order| %>
+              <div class="comanda-card">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+                  <div>
+                    <h3 style="margin:0 0 4px 0;">Comanda #<%= order.id %> — <small><%= order.created_at.strftime('%d.%m.%Y %H:%M') %></small></h3>
+                    <p style="margin:0; color:#555;">Client: <%= order.user&.username || order.user&.email %> | Adresă: <%= order.address %></p>
+                    <ul style="margin:6px 0 0 16px;">
+                      <% order.order_items.each do |oi| %>
+                        <li><%= oi.product&.name %> × <%= oi.quantity %></li>
+                      <% end %>
+                    </ul>
+                    <p style="margin:6px 0 0 0;"><strong>Total:</strong> <%= number_with_precision(order.total, precision: 2) %> lei</p>
+                  </div>
+                  <div>
+                    <% if order.status == 'pending' %>
+                      <%= button_to 'Confirmă', employee_confirm_order_path(order), method: :patch, class: 'form-button' %>
+                    <% elsif order.status == 'confirmed' %>
+                      <%= button_to 'Finalizează', employee_complete_order_path(order), method: :patch, class: 'form-button' %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </section>
+
       <section id="sectiunea-stocuri" class="section-content">
         <h2>Stoc ingrediente</h2>
 
@@ -51,6 +84,46 @@
         <div class="pisica-card">
           <h3>Luna</h3>
           <p>Status: Somn</p>
+        </div>
+      </section>
+
+      <section id="sectiunea-mese" class="section-content">
+        <h2>Mese</h2>
+        <div class="reservations-board">
+          <div class="reservations-col">
+            <% @dining_tables.each do |t| %>
+              <div class="masa-card" data-table-id="<%= t.id %>" data-controller="reservations-board" data-reservations-board-target="table" data-action="dragover->reservations-board#allowDrop drop->reservations-board#dropOnTable">
+                <h3>Masa <%= t.name %></h3>
+                <p>Locuri: <%= t.seats %></p>
+                <p><strong>Rezervări:</strong></p>
+                <ul>
+                  <% t.reservations.where(status: 'assigned').order(:starts_at).each do |r| %>
+                    <li>
+                      <%= r.starts_at.strftime('%d.%m %H:%M') %> - <%= (r.starts_at + r.duration_minutes.minutes).strftime('%H:%M') %> | <%= r.user&.username || r.user&.email %> ( <%= r.seats %> )
+                      <%= button_to 'Finalizat', employee_complete_reservation_path(r), method: :patch, form: { class: 'inline-form' }, class: 'form-button ml-8' %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="reservations-col">
+            <div class="mesaj-card">
+              <h3>Cereri rezervări</h3>
+              <% if @reservation_requests.blank? %>
+                <p>Nu există cereri în așteptare.</p>
+              <% else %>
+                <ul id="reservation-requests">
+                  <% @reservation_requests.each do |r| %>
+                    <li draggable="true" data-controller="reservations-board" data-reservations-board-reservation-id-value="<%= r.id %>" data-action="dragstart->reservations-board#dragStart" class="reservation-request-item">
+                      <strong>#<%= r.id %></strong> — <%= r.starts_at.strftime('%d.%m %H:%M') %> | Locuri: <%= r.seats %> | <%= r.user&.username || r.user&.email %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+          </div>
         </div>
       </section>
 

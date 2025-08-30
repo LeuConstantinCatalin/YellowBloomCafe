@@ -1,0 +1,18 @@
+<p>Bună <%= @user.username || @user.email %>,</p>
+
+<p>Rezervarea ta a fost alocată.</p>
+
+<ul>
+  <li>Masa: <strong><%= @table.name %></strong> (locuri: <%= @table.seats %>)</li>
+  <li>Data: <%= @reservation.starts_at.strftime('%d.%m.%Y') %></li>
+  <li>Ora: <%= @reservation.starts_at.strftime('%H:%M') %> - <%= (@reservation.starts_at + @reservation.duration_minutes.minutes).strftime('%H:%M') %></li>
+  <li>Număr locuri: <%= @reservation.seats %></li>
+  <li>Durată: <%= @reservation.duration_minutes %> minute</li>
+  <li>Status: <%= @reservation.status %></li>
+  <li>Adresă: <%= @user.adresa.presence || '-' %></li>
+  <li>Notă: vă rugăm să ajungeți cu 5 minute înainte.</li>
+  
+</ul>
+
+<p>Mulțumim,<br>YellowBloom</p>
+

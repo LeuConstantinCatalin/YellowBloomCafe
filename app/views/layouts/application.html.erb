@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Cafeteria</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'styles', media: 'all', 'data-turbo-track': 'reload' %>
     <% if defined?(employee_path) && current_page?(employee_path) %>
       <%= stylesheet_link_tag 'employee_sidebar', media: 'all', 'data-turbo-track': 'reload' %>
     <% end %>
+    <%# Legarea CSS-ului pentru sidebarul de meniu se face direct din partialul sidebar %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_import_module_tag 'application' %>
   </head>
 <body>
   <nav class="navbar">
@@ -32,6 +37,8 @@
   <div class="page-layout">
     <% if current_page?(employee_path) %>
       <%= render 'layouts/employee_sidebar' %>
+    <% elsif current_page?(menu_path) && current_user %>
+      <%= render 'layouts/order_sidebar' %>
     <% else %>
       <aside class="sidebar">
         <h2>Contact</h2>

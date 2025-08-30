@@ -1,6 +1,9 @@
 class EmployeeControlsController < ApplicationController
   def index
     @ingredients = Ingredient.order(:name)
+    @orders = Order.includes(order_items: :product).where(status: ["pending", "confirmed"]).order(created_at: :desc)
+    @dining_tables = DiningTable.includes(:reservations).order(:name)
+    @reservation_requests = Reservation.where(status: 'requested').order(:starts_at)
   end
 
   def update_ingredient
@@ -12,10 +15,58 @@ class EmployeeControlsController < ApplicationController
     end
   end
 
+  def confirm_order
+    order = Order.find(params[:id])
+    unless order.status == 'pending'
+      redirect_to employee_path, alert: 'Comanda nu este în stare validă pentru confirmare.' and return
+    end
+    order.update!(status: 'confirmed')
+    redirect_to employee_path, notice: 'Comanda a fost confirmată.'
+  end
+
+  def complete_order
+    order = Order.find(params[:id])
+    unless order.status == 'confirmed'
+      redirect_to employee_path, alert: 'Doar comenzile confirmate pot fi finalizate.' and return
+    end
+    order.update!(status: 'completed')
+    redirect_to employee_path, notice: 'Comanda a fost finalizată.'
+  end
+
+  def assign_reservation
+    reservation = Reservation.find(params[:id])
+    table = DiningTable.find(params[:table_id])
+    unless reservation.status == 'requested'
+      render json: { error: 'Rezervarea nu este în stare de atribuire.' }, status: :unprocessable_entity and return
+    end
+
+    # Check overlap
+    temp = Reservation.new(id: reservation.id, starts_at: reservation.starts_at, duration_minutes: reservation.duration_minutes)
+    if temp.overlaps_for_table?(table)
+      render json: { error: 'Interval indisponibil pentru această masă.' }, status: :unprocessable_entity and return
+    end
+
+    if reservation.seats > table.seats
+      render json: { error: 'Numărul de locuri depășește capacitatea mesei.' }, status: :unprocessable_entity and return
+    end
+
+    reservation.update!(dining_table: table, status: 'assigned')
+
+    render json: { ok: true }
+  end
+
+  def complete_reservation
+    reservation = Reservation.find(params[:id])
+    unless reservation.status == 'assigned'
+      render json: { error: 'Doar rezervările asignate pot fi finalizate.' }, status: :unprocessable_entity and return
+    end
+    reservation.update!(status: 'completed')
+    render json: { ok: true }
+  end
+
   private
 
   def ingredient_params
     params.require(:ingredient).permit(:stock_quantity)
   end
 end
-

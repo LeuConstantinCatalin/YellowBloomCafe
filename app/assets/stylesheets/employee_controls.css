@@ -1,4 +1,4 @@
-.section-content {
+﻿.section-content {
   padding: 20px;
   margin-bottom: 40px;
   background-color: #f4f4f4;
@@ -263,3 +263,12 @@ button#add-reservation-1:hover, button#add-reservation-2:hover, button#add-reser
   border-color: #bbb;
 }
 
+
+
+/* Reservations board layout */
+.reservations-board { display:flex; gap:16px; align-items:flex-start; }
+.reservations-col { flex: 1; }
+.inline-form { display: inline; }
+.ml-8 { margin-left: 8px; }
+.reservation-request-item { padding:6px 8px; border:1px solid #eee; border-radius:6px; margin-bottom:8px; background:#fff; cursor: grab; }
+.reservation-request-item:active { cursor: grabbing; }
