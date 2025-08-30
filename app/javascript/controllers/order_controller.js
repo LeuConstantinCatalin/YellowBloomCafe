@@ -50,6 +50,9 @@ export default class extends Controller {
     this.updateInfoVisibility()
   }
 
+  // Back-compat: keep old action name working
+  toggleCollapse(event) { return this.toggleSection(event) }
+
   closeAllSections() {
     this.element.querySelectorAll('.sb-card .sb-content').forEach(el => {
       el.classList.remove('open')
