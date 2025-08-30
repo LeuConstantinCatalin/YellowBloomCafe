@@ -65,6 +65,8 @@ export default class extends Controller {
     const info = this.element.querySelector('.sidebar-info')
     if (!info) return
     const anyOpen = Array.from(this.element.querySelectorAll('.sb-content')).some(c => c.classList.contains('open'))
+    // Toggle both a container flag and the info visibility for robustness
+    this.element.classList.toggle('has-open', anyOpen)
     info.classList.toggle('is-hidden', anyOpen)
   }
 

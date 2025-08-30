@@ -33,6 +33,7 @@
 /* Sidebar top info block */
 .sidebar-info { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 12px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
 .sidebar-info.is-hidden { display: none; }
+.sidebar.has-open .sidebar-info { display: none; }
 .sidebar-subtitle { margin: 0 0 6px; font-size: 0.95rem; color: #333; }
 .sidebar-steps { margin: 0 0 6px 16px; color: #444; }
 .sidebar-steps li { margin: 2px 0; }
