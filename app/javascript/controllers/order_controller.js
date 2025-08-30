@@ -13,7 +13,7 @@ export default class extends Controller {
     this.updateTotals()
     this.renderCart()
 
-    // Re-render + buttons if sections toggle open/closed
+    // Re-render + buttons if menu sections toggle open/closed
     this._boundToggleHandler = (e) => {
       if (e.target && e.target.matches && e.target.matches('.toggle-btn')) {
         if (this.orderMode) this.renderAddButtons()
@@ -21,11 +21,9 @@ export default class extends Controller {
     }
     document.addEventListener('click', this._boundToggleHandler, true)
 
-    // Initialize collapsible sections closed
-    this.element.querySelectorAll('.sb-content').forEach(el => {
-      el.classList.remove('open')
-      el.style.maxHeight = '0'
-    })
+    // Start collapsed
+    this.closeAllSections()
+    this.updateInfoVisibility()
   }
 
   disconnect() {
@@ -34,8 +32,8 @@ export default class extends Controller {
     }
   }
 
-  // Sidebar collapsible cards
-  toggleCollapse(event) {
+  // Sidebar collapsible cards (wired via data-action)
+  toggleSection(event) {
     const btn = event.currentTarget
     const card = btn.closest('.sb-card')
     if (!card) return
@@ -43,19 +41,28 @@ export default class extends Controller {
     if (!content) return
 
     const wasOpen = content.classList.contains('open')
-    // Close all sections
-    this.element.querySelectorAll('.sb-card .sb-content').forEach(el => {
-      el.classList.remove('open')
-      el.style.maxHeight = '0'
-    })
-    this.element.querySelectorAll('.sb-card .sb-toggle-btn').forEach(b => b.textContent = '+')
-
-    // Open selected if it was closed
+    this.closeAllSections()
     if (!wasOpen) {
       content.classList.add('open')
       content.style.maxHeight = content.scrollHeight + 'px'
       btn.textContent = '−'
     }
+    this.updateInfoVisibility()
+  }
+
+  closeAllSections() {
+    this.element.querySelectorAll('.sb-card .sb-content').forEach(el => {
+      el.classList.remove('open')
+      el.style.maxHeight = '0'
+    })
+    this.element.querySelectorAll('.sb-card .sb-toggle-btn').forEach(b => b.textContent = '+')
+  }
+
+  updateInfoVisibility() {
+    const info = this.element.querySelector('.sidebar-info')
+    if (!info) return
+    const anyOpen = Array.from(this.element.querySelectorAll('.sb-content')).some(c => c.classList.contains('open'))
+    info.classList.toggle('is-hidden', anyOpen)
   }
 
   // Toggle order mode: show + buttons on each product card

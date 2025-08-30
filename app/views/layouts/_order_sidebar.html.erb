@@ -26,7 +26,7 @@
   <div class="sb-card">
     <div class="sb-header">
       <strong>Comenzi</strong>
-      <button type="button" class="btn sb-toggle-btn">+</button>
+      <button type="button" class="btn sb-toggle-btn" data-action="click->order#toggleSection">+</button>
     </div>
     <div class="sb-content">
       <div class="order-controls">
@@ -105,7 +105,7 @@
   <div class="sb-card">
     <div class="sb-header">
       <strong>Rezervări</strong>
-      <button type="button" class="btn sb-toggle-btn">+</button>
+      <button type="button" class="btn sb-toggle-btn" data-action="click->order#toggleSection">+</button>
     </div>
     <div class="sb-content">
       <% if current_user %>
@@ -165,59 +165,5 @@
     </div>
   </div>
 
-  <%= javascript_tag nonce: true do %>
-    (function() {
-      function setupSidebarToggles() {
-        var container = document.querySelector('aside.sidebar[data-controller="order"]');
-        if (!container) return;
-
-        var buttons = container.querySelectorAll('.sb-toggle-btn');
-        var contents = container.querySelectorAll('.sb-content');
-        var info = container.querySelector('.sidebar-info');
-
-        function updateInfoVisibility() {
-          var anyOpen = false;
-          contents.forEach(function(c){ if (c.classList.contains('open')) anyOpen = true; });
-          if (info) {
-            if (anyOpen) {
-              info.classList.add('is-hidden');
-            } else {
-              info.classList.remove('is-hidden');
-            }
-          }
-        }
-
-        function closeAll() {
-          contents.forEach(function(c){ c.classList.remove('open'); c.style.maxHeight = '0'; });
-          buttons.forEach(function(b){ b.textContent = '+'; });
-          updateInfoVisibility();
-        }
-
-        buttons.forEach(function(btn){
-          btn.addEventListener('click', function(){
-            var card = btn.closest('.sb-card');
-            if (!card) return;
-            var content = card.querySelector('.sb-content');
-            var wasOpen = content.classList.contains('open');
-            closeAll();
-            if (!wasOpen) {
-              content.classList.add('open');
-              content.style.maxHeight = content.scrollHeight + 'px';
-              btn.textContent = '-';
-            }
-            updateInfoVisibility();
-          });
-        });
-
-        // Start collapsed
-        closeAll();
-        updateInfoVisibility();
-      }
-
-      // Run now in case events already fired
-      setupSidebarToggles();
-      document.addEventListener('turbo:load', setupSidebarToggles);
-      document.addEventListener('DOMContentLoaded', setupSidebarToggles);
-    })();
-  <% end %>
+  <%# Toggling is handled in app/javascript/controllers/order_controller.js (order#toggleSection) %>
 </aside>
