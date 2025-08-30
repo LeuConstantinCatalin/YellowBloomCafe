@@ -21,8 +21,9 @@ export default class extends Controller {
     }
     document.addEventListener('click', this._boundToggleHandler, true)
 
-    // Start collapsed
+    // Start collapsed and wire ARIA/keyboard support
     this.closeAllSections()
+    this._wireAccordionAccessibility()
     this.updateInfoVisibility()
   }
 
@@ -46,6 +47,8 @@ export default class extends Controller {
       content.classList.add('open')
       content.style.maxHeight = content.scrollHeight + 'px'
       btn.textContent = '−'
+      btn.setAttribute('aria-expanded', 'true')
+      btn.setAttribute('aria-label', 'Închide secțiunea')
     }
     this.updateInfoVisibility()
   }
@@ -58,7 +61,11 @@ export default class extends Controller {
       el.classList.remove('open')
       el.style.maxHeight = '0'
     })
-    this.element.querySelectorAll('.sb-card .sb-toggle-btn').forEach(b => b.textContent = '+')
+    this.element.querySelectorAll('.sb-card .sb-toggle-btn').forEach(b => {
+      b.textContent = '+'
+      b.setAttribute('aria-expanded', 'false')
+      b.setAttribute('aria-label', 'Deschide secțiunea')
+    })
   }
 
   updateInfoVisibility() {
@@ -68,6 +75,30 @@ export default class extends Controller {
     // Toggle both a container flag and the info visibility for robustness
     this.element.classList.toggle('has-open', anyOpen)
     info.classList.toggle('is-hidden', anyOpen)
+    info.setAttribute('aria-hidden', anyOpen ? 'true' : 'false')
+    // Force style as last resort in case of CSS priority issues
+    info.style.display = anyOpen ? 'none' : ''
+  }
+
+  _wireAccordionAccessibility() {
+    const cards = this.element.querySelectorAll('.sb-card')
+    cards.forEach((card, idx) => {
+      const btn = card.querySelector('.sb-toggle-btn')
+      const content = card.querySelector('.sb-content')
+      if (!btn || !content) return
+      if (!content.id) content.id = `sb-content-${idx + 1}`
+      btn.setAttribute('aria-controls', content.id)
+      btn.setAttribute('aria-expanded', 'false')
+      btn.setAttribute('aria-label', 'Deschide secțiunea')
+      btn.setAttribute('type', 'button')
+      // Keyboard: Enter/Space toggles
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          this.toggleSection({ currentTarget: btn })
+        }
+      })
+    })
   }
 
   // Toggle order mode: show + buttons on each product card
