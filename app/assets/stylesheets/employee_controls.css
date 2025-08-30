@@ -229,6 +229,27 @@ button#add-reservation-1:hover, button#add-reservation-2:hover, button#add-reser
   font-style: italic;
 }
 
+/* Buttons & inputs for employee panel */
+.form-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 14px; font-weight: 600; border: none; cursor: pointer;
+  border-radius: 12px; background: #e2ad5f; color: #111; box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  transition: transform 240ms cubic-bezier(.2,.7,.3,1), box-shadow 240ms cubic-bezier(.2,.7,.3,1), filter 240ms;
+}
+.form-button:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+.form-button:active { transform: translateY(0); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.form-button:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-button.secondary { background: #ececec; color: #111; }
+
+.form-input, .section-content input[type="text"], .section-content input[type="number"], .section-content input[type="time"], .section-content input[type="email"], .section-content input[type="password"], .section-content textarea, .section-content select {
+  display: inline-block; padding: 10px 12px; border-radius: 12px; border: 1px solid #e5e7eb; background: #fff; color: #1f2937;
+  transition: border-color 240ms cubic-bezier(.2,.7,.3,1), box-shadow 240ms cubic-bezier(.2,.7,.3,1);
+}
+.form-input:focus-visible,
+.section-content input:focus-visible,
+.section-content textarea:focus-visible,
+.section-content select:focus-visible { outline: none; border-color: #e2ad5f; box-shadow: 0 0 0 3px rgba(226, 173, 95, 0.45); }
+
 .reservation-form {
   margin-top: 15px;
   padding: 15px;
