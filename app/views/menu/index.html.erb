@@ -33,7 +33,9 @@
                       <% end %>
                     </div>
                   </div>
-                  <div class="product-placeholder"></div>
+                  <div class="product-placeholder">
+                    <%= image_tag(image_for_category(p.category), alt: p.name, loading: 'lazy') %>
+                  </div>
                 </div>
               </li>
             <% end %>

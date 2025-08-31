@@ -3,14 +3,14 @@ class AdminController < ApplicationController
 
   def index
     per = 10
-    # Users list pagination
+
     @users_total = User.count
     @users_pages = (@users_total.to_f / per).ceil
     @users_page = [[params[:users_page].to_i, 1].max, [@users_pages, 1].max].min
-    @users = User.order(:username).offset((@users_page - 1) * per).limit(per)
+    @users = User.order(email_verified: :asc, username: :asc).offset((@users_page - 1) * per).limit(per)
     @products = Product.order(:category, :name)
 
-    # Basic site stats/performance proxies
+
     @stats = {
       users_total: User.count,
       users_by_role: User.group(:tip).count,
@@ -24,7 +24,7 @@ class AdminController < ApplicationController
     }
   end
 
-  # Create employee or manager accounts
+
   def create_user
     u = User.new(user_params)
     allowed = %w[angajat manager]

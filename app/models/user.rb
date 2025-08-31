@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  # When deleting a user, delete their orders to avoid NOT NULL violations on orders.user_id
+
   has_many :orders, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
 
-  # Roles: client, angajat (employee), manager, admin
+
   def role
     (self.tip.presence || "client").downcase
   end

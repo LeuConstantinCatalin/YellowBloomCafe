@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+
   allow_browser versions: :modern
 
   helper_method :current_user
@@ -16,14 +16,14 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # Require at least one of the allowed roles; redirect to root if unauthorized
+
   def require_roles(*roles)
     unless current_user && roles.map(&:to_s).include?(current_user.role)
       redirect_to root_path, alert: "Nu ai permisiune pentru aceastã paginã."
     end
   end
 
-  # If logged in as employee-only, keep them on the Employee page
+
   def redirect_employee_to_dashboard
     if current_user&.employee?
       redirect_to employee_path

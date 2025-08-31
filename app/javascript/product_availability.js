@@ -19,10 +19,10 @@ function handleAvailabilityUpdate(data) {
   const li = document.getElementById(`product-${product_id}`);
   if (!li) return;
 
-  // Update availability flag
+
   li.dataset.available = available ? 'true' : 'false';
 
-  // Toggle red label
+
   let label = li.querySelector('.product-status.unavailable');
   if (available) {
     if (label) label.remove();
@@ -36,12 +36,12 @@ function handleAvailabilityUpdate(data) {
     }
   }
 
-  // Re-sort within its list
+
   const ul = li.closest('ul');
   if (ul) sortList(ul);
 }
 
-// Subscribe once when the page loads
+
 document.addEventListener('DOMContentLoaded', () => {
   consumer.subscriptions.create('ProductAvailabilityChannel', {
     received: handleAvailabilityUpdate

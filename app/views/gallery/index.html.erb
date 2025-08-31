@@ -14,14 +14,21 @@
           <strong><%= sectiune %></strong>
           <button class="toggle-btn" onclick="toggleSection(this)">▼</button>
         </div>
+        <% preview_images = case sectiune
+           when 'Exterior' then Array.new(3, 'Exterior.png')
+           when 'Interior' then Array.new(3, 'Interior.png')
+           when 'Pisici'   then %w[Pisica1.jpg Pisica2.jpg Pisica3.jpg]
+           else []
+           end %>
         <div class="galerie-preview">
-          <div class="preview-box"></div>
-          <div class="preview-box"></div>
-          <div class="preview-box"></div>
+          <% preview_images.each do |img| %>
+            <div class="preview-box"><%= image_tag img, alt: "#{sectiune} preview", loading: 'lazy' %></div>
+          <% end %>
         </div>
+        <% grid_images = (sectiune == 'Pisici' ? %w[Pisica1.jpg Pisica2.jpg Pisica3.jpg] : ["#{sectiune}.png"]) %>
         <div class="galerie-content">
-          <% 6.times do %>
-            <div class="galerie-image"></div>
+          <% 6.times do |i| %>
+            <div class="galerie-image"><%= image_tag grid_images[i % grid_images.length], alt: "#{sectiune} #{i+1}", loading: 'lazy' %></div>
           <% end %>
         </div>
       </div>

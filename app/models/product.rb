@@ -14,8 +14,7 @@ class Product < ApplicationRecord
     product_ingredients.includes(:ingredient).map { |pi| pi.ingredient&.name }.compact.join(", ")
   end
 
-  # Compute availability, optionally overriding certain ingredient stocks
-  # overrides: { ingredient_id(Integer) => stock_quantity(Numeric) }
+
   def availability_with(overrides = {})
     product_ingredients.includes(:ingredient).all? do |pi|
       ing = pi.ingredient

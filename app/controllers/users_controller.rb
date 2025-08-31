@@ -8,7 +8,6 @@ class UsersController < ApplicationController
     @user.tip = "client"
 
     if @user.save
-      # Begin email verification flow
       session[:pending_user_id] = @user.id
       send_verification_code(@user)
       redirect_to verify_email_path, notice: "Cont creat! Ți-am trimis un cod de verificare."

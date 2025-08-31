@@ -3,19 +3,19 @@ class ManagerController < ApplicationController
 
   def index
     per = 10
-    # Products/recipes pagination
+
     @products_total = Product.count
     @products_pages = (@products_total.to_f / per).ceil
     @products_page = [[params[:products_page].to_i, 1].max, [@products_pages, 1].max].min
     @products = Product.order(:category, :name).offset((@products_page - 1) * per).limit(per)
 
-    # Reviews pagination
+
     @reviews_total = Review.count
     @reviews_pages = (@reviews_total.to_f / per).ceil
     @reviews_page = [[params[:reviews_page].to_i, 1].max, [@reviews_pages, 1].max].min
     @reviews = Review.includes(:user).order(created_at: :desc).offset((@reviews_page - 1) * per).limit(per)
 
-    # Messages pagination
+
     @messages_total = Message.count
     @messages_pages = (@messages_total.to_f / per).ceil
     @messages_page = [[params[:messages_page].to_i, 1].max, [@messages_pages, 1].max].min
@@ -23,7 +23,7 @@ class ManagerController < ApplicationController
     @ingredients = Ingredient.order(:name)
     @users = User.order(:username)
 
-    # Simple stats
+
     @stats = {
       users_total: User.count,
       users_clients: User.where(tip: 'client').count,
@@ -35,7 +35,7 @@ class ManagerController < ApplicationController
     }
   end
 
-  # Products
+
   def create_product
     p = Product.new(product_params)
     if p.save
@@ -54,7 +54,7 @@ class ManagerController < ApplicationController
     end
   end
 
-  # Recipes (ProductIngredient)
+
   def add_recipe_item
     product = Product.find(params[:product_id])
     ingredient = Ingredient.find(params[:ingredient_id])
@@ -74,7 +74,7 @@ class ManagerController < ApplicationController
     redirect_to manager_path, notice: "Ingredient scos din retetã."
   end
 
-  # User management: create employee accounts
+
   def create_employee
     u = User.new(user_params)
     u.tip = 'angajat'

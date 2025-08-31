@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <%# Client-only: reviews and messages card under account details %>
+      
       <% if current_user && (current_user.client? || current_user.admin?) %>
         <div class="form-group" style="margin-top:20px;">
           <p><strong>Lasă o recenzie sau un mesaj către local</strong></p>
@@ -198,7 +198,7 @@
 
   </div>
 
-  <%# moved the client review/message card into the logged-in container above %>
+  
 
   <script>
     function showForm(formType) {
@@ -215,7 +215,7 @@
       }
     }
 
-    // Edit/Save toggle for account details
+    
     let isEditing = false;
     function toggleEditSave() {
       const form = document.getElementById('account-edit-form');
@@ -225,7 +225,7 @@
 
       if (!isEditing) {
         editableInputs.forEach(el => el.disabled = false);
-        // Hide actual submit buttons if any (we submit programmatically)
+        
         submitButtons.forEach(el => el.style.display = 'none');
         btn.textContent = 'Salveaza';
         isEditing = true;

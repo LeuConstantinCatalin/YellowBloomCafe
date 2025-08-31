@@ -68,6 +68,14 @@
   transform: translateY(-5px);
 }
 
+.preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
 .galerie-content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -95,6 +103,14 @@
 .galerie-image:hover {
   background-color: #bbb;
   transform: translateY(-6px);
+}
+
+.galerie-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
 }
 
 @media (max-width: 768px) {

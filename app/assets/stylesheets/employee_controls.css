@@ -229,7 +229,7 @@ button#add-reservation-1:hover, button#add-reservation-2:hover, button#add-reser
   font-style: italic;
 }
 
-/* Buttons & inputs for employee panel */
+
 .form-button {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 10px 14px; font-weight: 600; border: none; cursor: pointer;
@@ -286,7 +286,6 @@ button#add-reservation-1:hover, button#add-reservation-2:hover, button#add-reser
 
 
 
-/* Reservations board layout */
 .reservations-board { display:flex; gap:16px; align-items:flex-start; }
 .reservations-col { flex: 1; }
 .inline-form { display: inline; }

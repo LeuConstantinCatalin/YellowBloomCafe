@@ -10,7 +10,7 @@
     <% if (defined?(employee_path) && current_page?(employee_path)) || (defined?(manager_path) && current_page?(manager_path)) || (defined?(admin_path) && current_page?(admin_path)) %>
       <%= stylesheet_link_tag 'employee_sidebar', media: 'all', 'data-turbo-track': 'reload' %>
     <% end %>
-    <%# Legarea CSS-ului pentru sidebarul de meniu se face direct din partialul sidebar %>
+    
     <%= javascript_importmap_tags %>
     <%= javascript_import_module_tag 'application' %>
   </head>

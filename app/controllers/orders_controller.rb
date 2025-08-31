@@ -21,14 +21,14 @@ class OrdersController < ApplicationController
       if address.blank?
         render json: { error: 'Adresa este necesară pentru finalizare.' }, status: :unprocessable_entity and return
       end
-      # Save address to user profile as requested
+
       current_user.update(adresa: address)
     end
 
     product_ids = items.map { |i| i[:product_id].to_i }
     products = Product.includes(product_ingredients: :ingredient).where(id: product_ids).index_by(&:id)
 
-    # Validate products exist and compute price total
+
     total = 0.to_d
     items.each do |it|
       p = products[it[:product_id].to_i]
@@ -39,8 +39,7 @@ class OrdersController < ApplicationController
       total += price * it[:quantity].to_i
     end
 
-    # Aggregate required ingredient quantities for the whole cart
-    required = Hash.new(0.to_d) # { ingredient_id => total_required }
+    required = Hash.new(0.to_d) 
     items.each do |it|
       p = products[it[:product_id].to_i]
       qty = it[:quantity].to_i
@@ -49,11 +48,11 @@ class OrdersController < ApplicationController
       end
     end
 
-    # Create order and deduct stock atomically
+
     order = nil
     shortages = []
     ActiveRecord::Base.transaction do
-      # Lock and verify stocks
+
       ingredients = Ingredient.lock.where(id: required.keys).index_by(&:id)
       required.each do |ing_id, need|
         ing = ingredients[ing_id]
@@ -63,13 +62,12 @@ class OrdersController < ApplicationController
 
       break if shortages.any?
 
-      # Deduct stock
+
       required.each do |ing_id, need|
         ing = ingredients[ing_id]
         ing.update!(stock_quantity: (ing.stock_quantity.to_d - need))
       end
 
-      # Persist order + items
       order = Order.create!(user: current_user, status: 'pending', address: address, total: total)
       items.each do |it|
         p = products[it[:product_id].to_i]

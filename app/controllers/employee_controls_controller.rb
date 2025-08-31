@@ -3,13 +3,11 @@ class EmployeeControlsController < ApplicationController
   def index
     per = 10
 
-    # Ingrediente paginate
     @ingredients_total = Ingredient.count
     @ingredients_pages = (@ingredients_total.to_f / per).ceil
     @ingredients_page = [[params[:ingredients_page].to_i, 1].max, [@ingredients_pages, 1].max].min
     @ingredients = Ingredient.order(:name).offset((@ingredients_page - 1) * per).limit(per)
 
-    # Rețete (produse) paginate
     @recipes_total = Product.count
     @recipes_pages = (@recipes_total.to_f / per).ceil
     @recipes_page = [[params[:recipes_page].to_i, 1].max, [@recipes_pages, 1].max].min

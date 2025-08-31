@@ -15,7 +15,7 @@ class Reservation < ApplicationRecord
     starts_at + duration_minutes.minutes
   end
 
-  # Overlap check for a table
+
   def overlaps_for_table?(table)
     return false unless table
     s = starts_at

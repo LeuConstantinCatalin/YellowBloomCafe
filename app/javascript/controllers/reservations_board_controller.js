@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Drag requested reservation -> drop on table to assign
+
 export default class extends Controller {
   static values = { reservationId: Number }
   static targets = ["table"]
@@ -30,7 +30,7 @@ export default class extends Controller {
       try { data = await res.json() } catch (_) {}
       if (!res.ok) throw new Error((data && data.error) || `Eroare ${res.status}`)
 
-      // Remove li from requests list for quick feedback
+
       const li = document.querySelector(`[data-reservations-board-reservation-id-value="${reservationId}"]`)
       if (li && li.parentElement) li.parentElement.removeChild(li)
     } catch (e) {

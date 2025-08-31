@@ -1,4 +1,4 @@
-/* Sidebar orders & reservations */
+
 .order-controls .btn { width: 100%; margin-bottom: 10px; }
 .cart h3 { margin-top: 10px; }
 .cart-items { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
@@ -30,7 +30,6 @@
 .reservation-block .row { display:flex; flex-direction: column; margin-bottom: 10px; }
 .reservation-block label { font-size: 0.9rem; color: #555; margin-bottom: 6px; }
 
-/* Sidebar top info block */
 .sidebar-info { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 12px; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
 .sidebar-info.is-hidden { display: none; }
 .sidebar.has-open .sidebar-info { display: none; }

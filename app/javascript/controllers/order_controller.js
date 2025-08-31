@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Handles client-side cart and order mode on the menu page
+
 export default class extends Controller {
   static targets = [
     "cart", "cartItems", "total", "toggleBtn", "checkoutBtn", "addressInput", "feedback"
@@ -13,7 +13,6 @@ export default class extends Controller {
     this.updateTotals()
     this.renderCart()
 
-    // Re-render + buttons if menu sections toggle open/closed
     this._boundToggleHandler = (e) => {
       if (e.target && e.target.matches && e.target.matches('.toggle-btn')) {
         if (this.orderMode) this.renderAddButtons()
@@ -21,7 +20,7 @@ export default class extends Controller {
     }
     document.addEventListener('click', this._boundToggleHandler, true)
 
-    // Start collapsed and wire ARIA/keyboard support
+
     this.closeAllSections()
     this._wireAccordionAccessibility()
     this.updateInfoVisibility()
@@ -33,7 +32,6 @@ export default class extends Controller {
     }
   }
 
-  // Sidebar collapsible cards (wired via data-action)
   toggleSection(event) {
     const btn = event.currentTarget
     const card = btn.closest('.sb-card')
@@ -53,7 +51,7 @@ export default class extends Controller {
     this.updateInfoVisibility()
   }
 
-  // Back-compat: keep old action name working
+
   toggleCollapse(event) { return this.toggleSection(event) }
 
   closeAllSections() {
@@ -72,11 +70,11 @@ export default class extends Controller {
     const info = this.element.querySelector('.sidebar-info')
     if (!info) return
     const anyOpen = Array.from(this.element.querySelectorAll('.sb-content')).some(c => c.classList.contains('open'))
-    // Toggle both a container flag and the info visibility for robustness
+
     this.element.classList.toggle('has-open', anyOpen)
     info.classList.toggle('is-hidden', anyOpen)
     info.setAttribute('aria-hidden', anyOpen ? 'true' : 'false')
-    // Force style as last resort in case of CSS priority issues
+
     info.style.display = anyOpen ? 'none' : ''
   }
 
@@ -91,7 +89,7 @@ export default class extends Controller {
       btn.setAttribute('aria-expanded', 'false')
       btn.setAttribute('aria-label', 'Deschide secțiunea')
       btn.setAttribute('type', 'button')
-      // Keyboard: Enter/Space toggles
+
       btn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
@@ -101,7 +99,7 @@ export default class extends Controller {
     })
   }
 
-  // Toggle order mode: show + buttons on each product card
+
   toggleMode() {
     this.orderMode = !this.orderMode
     document.body.classList.toggle('order-mode', this.orderMode)
@@ -109,22 +107,28 @@ export default class extends Controller {
     this.renderAddButtons()
   }
 
-  // Inject or remove + buttons for each product in menu
+
   renderAddButtons() {
-    // Be robust to markup: select by id prefix if possible
+
     const productLis = document.querySelectorAll('li[id^="product-"]')
     productLis.forEach(li => {
       const placeholder = li.querySelector('.product-placeholder')
       if (!placeholder) return
 
-      // Cleanup existing button
-      placeholder.innerHTML = ''
+
+      placeholder.style.position = 'relative'
+      const existingBtn = placeholder.querySelector('.btn-add-to-cart')
+      if (existingBtn) existingBtn.remove()
+
       if (!this.orderMode) return
 
       const available = (li.dataset.available === 'true' || li.dataset.available === '1')
       const addBtn = document.createElement('button')
-      addBtn.className = 'btn btn-primary btn-add-to-cart'
+      addBtn.className = 'btn-add-to-cart'
       addBtn.textContent = '+'
+
+      addBtn.title = available ? 'Adauga in cos' : 'Indisponibil'
+      addBtn.setAttribute('aria-label', addBtn.title)
       addBtn.title = available ? 'Adaugă în coș' : 'Indisponibil'
       addBtn.disabled = !available
 
@@ -244,10 +248,10 @@ export default class extends Controller {
     }
   }
 
-  // Helpers
+
   _productIdFromLi(li) { return Number((li.id || '').replace('product-', '')) }
   _parsePrice(text) {
-    // Expecting formats like "12 lei" or "12,50 lei"
+
     const cleaned = (text || '').replace(/[^0-9,\.]/g, '').replace(',', '.')
     const val = parseFloat(cleaned)
     return isNaN(val) ? 0 : val

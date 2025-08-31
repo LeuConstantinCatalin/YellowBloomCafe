@@ -14,7 +14,7 @@ class Ingredient < ApplicationRecord
     return if before.nil? || after.nil?
 
     overrides_before = { id => before }
-    # Compare availability for each affected product
+    
     products.includes(product_ingredients: :ingredient).each do |product|
       prev_available = product.availability_with(overrides_before)
       curr_available = product.available?
