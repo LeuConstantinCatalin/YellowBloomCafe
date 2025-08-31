@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   # Admin dashboard
   get "admin", to: "admin#index", as: :admin
   post "admin/users", to: "admin#create_user", as: :admin_users
+  delete "admin/users/:id", to: "admin#destroy_user", as: :admin_user
 
   resources :users, only: [:create]
   resources :account, only: [:index, :create]

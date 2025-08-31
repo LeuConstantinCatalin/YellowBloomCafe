@@ -70,6 +70,58 @@
           <button type="button" class="form-button" onclick="hideDeleteConfirm()" style="margin-top:10px;">Anuleaza</button>
         </div>
       </div>
+
+      <%# Client-only: reviews and messages card under account details %>
+      <% if current_user && (current_user.client? || current_user.admin?) %>
+        <div class="form-group" style="margin-top:20px;">
+          <p><strong>Lasă o recenzie sau un mesaj către local</strong></p>
+          <small>Părerea ta ne ajută să îmbunătățim serviciile.</small>
+        </div>
+
+        <div class="card hover-lift account-feedback-card">
+          <div class="card-header">
+            <strong>Feedback</strong>
+            <span class="card-sub">Mulțumim pentru impresii!</span>
+          </div>
+
+          <div class="feedback-section">
+            <h3>Lasă o recenzie</h3>
+            <%= form_with url: reviews_path, method: :post, local: true do |f| %>
+              <div class="form-group">
+                <label>Rating</label>
+                <div class="star-rating" aria-label="Alege ratingul">
+                  <% 5.downto(1) do |n| %>
+                    <input type="radio" id="star-<%= n %>" name="review[rating]" value="<%= n %>" required>
+                    <label for="star-<%= n %>" title="<%= n %> stele">★</label>
+                  <% end %>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Comentariu</label>
+                <textarea name="review[content]" class="form-input" rows="3" placeholder="Spune-ne părerea ta" required></textarea>
+              </div>
+              <button type="submit" class="form-button">Trimite recenzia</button>
+            <% end %>
+          </div>
+
+          <hr />
+
+          <div class="feedback-section">
+            <h3>Trimite un mesaj către local</h3>
+            <%= form_with url: messages_path, method: :post, local: true do |f| %>
+              <div class="form-group">
+                <label>Subiect (opțional)</label>
+                <input type="text" name="message[subject]" class="form-input" placeholder="Subiect" />
+              </div>
+              <div class="form-group">
+                <label>Mesaj</label>
+                <textarea name="message[content]" class="form-input" rows="3" placeholder="Mesajul tău" required></textarea>
+              </div>
+              <button type="submit" class="form-button">Trimite mesajul</button>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     <% else %>
 
       <div class="form-tabs">
@@ -146,45 +198,7 @@
 
   </div>
 
-  <%# Client-only: reviews and messages %>
-  <% if current_user&.client? %>
-    <div class="form-container" style="margin-top:20px;">
-      <div class="form-section">
-        <h2>Lasă o recenzie</h2>
-        <%= form_with url: reviews_path, method: :post, local: true do |f| %>
-          <div class="form-group">
-            <label>Rating</label>
-            <select name="review[rating]" class="form-input" required>
-              <option value="">Alege...</option>
-              <% (1..5).each do |n| %>
-                <option value="<%= n %>"><%= n %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Comentariu</label>
-            <textarea name="review[content]" class="form-input" rows="3" placeholder="Spune-ne părerea ta" required></textarea>
-          </div>
-          <button type="submit" class="form-button">Trimite recenzia</button>
-        <% end %>
-      </div>
-
-      <div class="form-section" style="margin-top:20px;">
-        <h2>Trimite un mesaj către local</h2>
-        <%= form_with url: messages_path, method: :post, local: true do |f| %>
-          <div class="form-group">
-            <label>Subiect (opțional)</label>
-            <input type="text" name="message[subject]" class="form-input" placeholder="Subiect" />
-          </div>
-          <div class="form-group">
-            <label>Mesaj</label>
-            <textarea name="message[content]" class="form-input" rows="3" placeholder="Mesajul tău" required></textarea>
-          </div>
-          <button type="submit" class="form-button">Trimite mesajul</button>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+  <%# moved the client review/message card into the logged-in container above %>
 
   <script>
     function showForm(formType) {

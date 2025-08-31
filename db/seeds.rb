@@ -201,3 +201,39 @@ upsert_user(username: 'manager1', nume: 'Vasilescu', prenume: 'Ioana', email: 'm
 upsert_user(username: 'admin1',   nume: 'Georgescu', prenume: 'Radu', email: 'admin1@example.com',   password: 'parola123', tip: 'admin')
 
 puts "Utilizatori de test creati/actualizati: #{User.where(email: ['client1@example.com','angajat1@example.com','manager1@example.com','admin1@example.com']).count}"
+
+# Adaugă încă 25 de conturi de clienți (client2 .. client26)
+puts "Seeding clienti suplimentari (client2 .. client26)..."
+client_emails = []
+(2..26).each do |n|
+  email = "client#{n}@example.com"
+  client_emails << email
+  upsert_user(
+    username: "client#{n}",
+    nume: "Popescu",
+    prenume: "Client#{n}",
+    email: email,
+    password: "parola123",
+    tip: 'client'
+  )
+end
+puts "Clienti creati/actualizati: #{User.where(email: client_emails).count}"
+
+# Adaugă 5 clienți cu email neverificat (client27 .. client31)
+puts "Seeding clienti neverificati (client27 .. client31)..."
+nv_emails = []
+(27..31).each do |n|
+  email = "client#{n}@example.com"
+  nv_emails << email
+  u = upsert_user(
+    username: "client#{n}",
+    nume: "Popescu",
+    prenume: "Client#{n}",
+    email: email,
+    password: "parola123",
+    tip: 'client'
+  )
+  # Marchează explicit ca neverificat
+  u.update!(email_verified: false, email_verification_code: "#{format('%06d', rand(0..999999))}", email_verification_sent_at: Time.current)
+end
+puts "Clienti neverificati creati/actualizati: #{User.where(email: nv_emails, email_verified: false).count}"

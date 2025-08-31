@@ -73,6 +73,7 @@
             </div>
           <% end %>
         </div>
+        <%= paginate_compact(current_page: @ingredients_page, total_pages: @ingredients_pages, param: 'ingredients_page') %>
       </section>
 
       <section id="sectiunea-retete" class="section-content">
@@ -90,19 +91,10 @@
             </div>
           <% end %>
         </div>
+        <%= paginate_compact(current_page: @recipes_page, total_pages: @recipes_pages, param: 'recipes_page') %>
       </section>
 
-      <section id="sectiunea-pisici" class="section-content">
-        <h2>Pisici</h2>
-        <div class="pisica-card">
-          <h3>Mitzi</h3>
-          <p>Status: Activă</p>
-        </div>
-        <div class="pisica-card">
-          <h3>Luna</h3>
-          <p>Status: Somn</p>
-        </div>
-      </section>
+      <%# Secțiunea Pisici eliminată conform cerinței %>
 
       <section id="sectiunea-mese" class="section-content">
         <h2>Mese</h2>

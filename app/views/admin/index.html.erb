@@ -12,6 +12,49 @@
         </div>
       <% end %>
 
+    <section id="sectiunea-user-list" class="section-content">
+        <h2>Utilizatori</h2>
+        <div class="comanda-card">
+          <% if @users.blank? %>
+            <p>Nu există utilizatori.</p>
+          <% else %>
+            <div style="overflow-x:auto;">
+              <table style="width:100%; border-collapse:collapse;">
+                <thead>
+                  <tr>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid #eee;">Username</th>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid #eee;">Email</th>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid #eee;">Rol</th>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid #eee;">Email verificat</th>
+                    <th style="text-align:left; padding:8px; border-bottom:1px solid #eee;">Creat</th>
+                    <th style="padding:8px; border-bottom:1px solid #eee;">Actiuni</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @users.each do |u| %>
+                    <tr class="<%= 'unverified' if (u.respond_to?(:email_verified) && !u.email_verified) %>">
+                      <td style="padding:8px;"><%= u.username.presence || '-' %></td>
+                      <td style="padding:8px;"><%= u.email %></td>
+                      <td style="padding:8px; text-transform:capitalize;"><%= u.tip %></td>
+                      <td style="padding:8px;"><%= u.respond_to?(:email_verified) && u.email_verified ? 'da' : 'nu' %></td>
+                      <td style="padding:8px;"><%= u.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+                      <td style="padding:8px; text-align:center;">
+                        <% if u.id != current_user.id %>
+                          <%= button_to 'Șterge', admin_user_path(u), method: :delete, class: 'form-button', data: { turbo_confirm: 'Sigur ștergi acest utilizator?' } %>
+                        <% else %>
+                          <small style="color:#888;">(tu)</small>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </div>
+        <%= paginate_compact(current_page: @users_page, total_pages: @users_pages, param: 'users_page') %>
+    </section>
+
     <section id="sectiunea-statistici" class="section-content">
         <h2>Statistici de performanță</h2>
         <div class="comanda-card">

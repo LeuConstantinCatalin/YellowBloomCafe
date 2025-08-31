@@ -1,8 +1,19 @@
 class EmployeeControlsController < ApplicationController
   before_action -> { require_roles('angajat','manager','admin') }
   def index
-    @ingredients = Ingredient.order(:name)
-    @products = Product.includes(product_ingredients: :ingredient).order(:category, :name)
+    per = 10
+
+    # Ingrediente paginate
+    @ingredients_total = Ingredient.count
+    @ingredients_pages = (@ingredients_total.to_f / per).ceil
+    @ingredients_page = [[params[:ingredients_page].to_i, 1].max, [@ingredients_pages, 1].max].min
+    @ingredients = Ingredient.order(:name).offset((@ingredients_page - 1) * per).limit(per)
+
+    # Rețete (produse) paginate
+    @recipes_total = Product.count
+    @recipes_pages = (@recipes_total.to_f / per).ceil
+    @recipes_page = [[params[:recipes_page].to_i, 1].max, [@recipes_pages, 1].max].min
+    @products = Product.includes(product_ingredients: :ingredient).order(:category, :name).offset((@recipes_page - 1) * per).limit(per)
     @orders = Order.includes(order_items: :product).where(status: ["pending", "confirmed"]).order(created_at: :desc)
     @dining_tables = DiningTable.includes(:reservations).order(:name)
     @reservation_requests = Reservation.where(status: 'requested').order(:starts_at)

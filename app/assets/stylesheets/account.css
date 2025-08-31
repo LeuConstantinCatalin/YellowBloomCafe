@@ -54,9 +54,12 @@
     background: linear-gradient(to left, #e2ad5f, #ffd582);
 }
 
-.form-section {
+/* Do not hide all sections by default; only control specific ones */
+#signup-form {
     display: none;
 }
+
+/* #login-form is visible by default via rule below */
 
 .form-section input {
     width: 100%;
@@ -126,3 +129,20 @@
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Reviews/Messages card under account details */
+.account-feedback-card { padding: 16px; margin-top: 6px; background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.account-feedback-card .card-header { display:flex; justify-content:space-between; align-items:center; padding: 12px 14px; margin: -16px -16px 12px; border-radius: 8px 8px 0 0; background: linear-gradient(90deg, var(--brand), var(--accent)); color: #fff; }
+.account-feedback-card .card-sub { font-size: 0.9rem; opacity: 0.9; }
+.account-feedback-card h3 { margin: 0 0 10px; font-size: 18px; }
+.account-feedback-card hr { border: 0; height: 1px; background: #eee; margin: 14px 0; }
+.account-feedback-card .form-group { margin-bottom: 12px; }
+
+/* Star rating */
+.star-rating { display: inline-flex; flex-direction: row-reverse; gap: 6px; }
+.star-rating input { display: none; }
+.star-rating label { font-size: 28px; line-height: 1; color: #ddd; cursor: pointer; transition: color 160ms ease; }
+.star-rating label:hover,
+.star-rating label:hover ~ label { color: #ffd582; }
+.star-rating input:checked + label,
+.star-rating input:checked + label ~ label { color: #e2ad5f; }

@@ -2,7 +2,12 @@ class AdminController < ApplicationController
   before_action -> { require_roles('admin') }
 
   def index
-    @users = User.order(:username)
+    per = 10
+    # Users list pagination
+    @users_total = User.count
+    @users_pages = (@users_total.to_f / per).ceil
+    @users_page = [[params[:users_page].to_i, 1].max, [@users_pages, 1].max].min
+    @users = User.order(:username).offset((@users_page - 1) * per).limit(per)
     @products = Product.order(:category, :name)
 
     # Basic site stats/performance proxies
@@ -32,10 +37,22 @@ class AdminController < ApplicationController
     end
   end
 
+  def destroy_user
+    u = User.find(params[:id])
+    if u.id == current_user.id
+      redirect_to admin_path, alert: "Nu poți șterge propriul cont." and return
+    end
+    begin
+      u.destroy!
+      redirect_to admin_path, notice: "Utilizatorul a fost șters."
+    rescue => e
+      redirect_to admin_path, alert: e.message
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:username, :nume, :prenume, :email, :password, :password_confirmation)
   end
 end
-

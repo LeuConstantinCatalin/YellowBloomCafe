@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :orders, dependent: :nullify
+  # When deleting a user, delete their orders to avoid NOT NULL violations on orders.user_id
+  has_many :orders, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :reviews, dependent: :destroy

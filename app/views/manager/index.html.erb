@@ -70,6 +70,7 @@
             </div>
           <% end %>
         </div>
+        <%= paginate_compact(current_page: @products_page, total_pages: @products_pages, param: 'products_page') %>
       </section>
 
       <section id="sectiunea-utilizatori" class="section-content">
@@ -93,7 +94,7 @@
       <section id="sectiunea-recenzii" class="section-content">
         <h2>Recenzii clienți</h2>
         <div class="orders-list">
-          <% Review.includes(:user).order(created_at: :desc).limit(20).each do |r| %>
+          <% @reviews.each do |r| %>
             <div class="comanda-card">
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <strong><%= r.user&.username || r.user&.email %></strong>
@@ -104,12 +105,13 @@
             </div>
           <% end %>
         </div>
+        <%= paginate_compact(current_page: @reviews_page, total_pages: @reviews_pages, param: 'reviews_page') %>
       </section>
 
       <section id="sectiunea-mesaje" class="section-content">
         <h2>Mesaje de la clienți</h2>
         <div class="orders-list">
-          <% Message.includes(:user).order(created_at: :desc).limit(20).each do |m| %>
+          <% @messages.each do |m| %>
             <div class="comanda-card">
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <strong><%= m.subject.presence || 'Mesaj' %></strong>
@@ -120,6 +122,7 @@
             </div>
           <% end %>
         </div>
+        <%= paginate_compact(current_page: @messages_page, total_pages: @messages_pages, param: 'messages_page') %>
       </section>
 
       <section id="sectiunea-statistici" class="section-content">

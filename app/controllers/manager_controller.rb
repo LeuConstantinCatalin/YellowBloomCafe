@@ -2,7 +2,24 @@ class ManagerController < ApplicationController
   before_action -> { require_roles('manager','admin') }
 
   def index
-    @products = Product.order(:category, :name)
+    per = 10
+    # Products/recipes pagination
+    @products_total = Product.count
+    @products_pages = (@products_total.to_f / per).ceil
+    @products_page = [[params[:products_page].to_i, 1].max, [@products_pages, 1].max].min
+    @products = Product.order(:category, :name).offset((@products_page - 1) * per).limit(per)
+
+    # Reviews pagination
+    @reviews_total = Review.count
+    @reviews_pages = (@reviews_total.to_f / per).ceil
+    @reviews_page = [[params[:reviews_page].to_i, 1].max, [@reviews_pages, 1].max].min
+    @reviews = Review.includes(:user).order(created_at: :desc).offset((@reviews_page - 1) * per).limit(per)
+
+    # Messages pagination
+    @messages_total = Message.count
+    @messages_pages = (@messages_total.to_f / per).ceil
+    @messages_page = [[params[:messages_page].to_i, 1].max, [@messages_pages, 1].max].min
+    @messages = Message.includes(:user).order(created_at: :desc).offset((@messages_page - 1) * per).limit(per)
     @ingredients = Ingredient.order(:name)
     @users = User.order(:username)
 
@@ -78,4 +95,3 @@ class ManagerController < ApplicationController
     params.require(:user).permit(:username, :nume, :prenume, :email, :password, :password_confirmation)
   end
 end
-
